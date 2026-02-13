@@ -47,4 +47,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
         if password:
             instance.set_password(password) # Criptografa a nova senha
         return super().update(instance, validated_data)
-    
+
+    def create(self, validated_data):
+        # Para o RegisterView funcionar, precisamos criar o usuário com senha criptografada
+        user = User.objects.create_user(**validated_data)
+        return user
