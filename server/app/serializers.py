@@ -31,16 +31,28 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    # Validamos o email para ser obrigatório e único
+    email = serializers.EmailField(required=True)
+
     class Meta:
         model = User
-        fields = ['name', 'profile_image', 'cover', 'birth_date', 'password']
+        fields = ['id', 'username', 'email', 'password', 'name', 'profile_image', 'cover', 'birth_date']
         extra_kwargs = {
-            'password': {'write_only': True, 'required': False},
-            'name': {'required': False},
-            'profile_image': {'required': False},
-            'cover': {'required': False},
-            'birth_date': {'required': False},
+            'password': {'write_only': True},
+            'username': {'required': True}
         }
+
+    def validate_email(self, value):
+        """Verifica se o e-mail já está cadastrado."""
+        if User.objects.filter(email__iexact=value).exists():
+            raise serializers.ValidationError("Este e-mail já está em uso.")
+        return value
+
+    def create(self, validated_data):
+        """Cria o usuário usando o método correto do Manager."""
+        # O create_user cuida da criptografia da senha automaticamente
+        user = User.objects.create_user(**validated_data)
+        return user
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
@@ -49,6 +61,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
     def create(self, validated_data):
-        # Para o RegisterView funcionar, precisamos criar o usuário com senha criptografada
+        # O create_user do AbstractUser precisa do username explicitamente
+        # ou descompactado do dicionário validated_data
         user = User.objects.create_user(**validated_data)
         return user
