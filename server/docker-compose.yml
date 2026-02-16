@@ -1,18 +1,30 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:15
-    environment:
-      POSTGRES_DB: xnerd_db
-      POSTGRES_USER: user_app
-      POSTGRES_PASSWORD: user_pass
-  web:
-    build: .
+    container_name: xnerd_db_container
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     env_file:
       - .env
-    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: .
+    container_name: xnerd_backend_container
+    restart: always
     volumes:
       - .:/app
     ports:
       - "8000:8000"
+    env_file:
+      - .env
     depends_on:
       - db
+
+# ESTA PARTE É OBRIGATÓRIA E DEVE FICAR NA MARGEM ESQUERDA (SEM ESPAÇOS)
+volumes:
+  postgres_data:
