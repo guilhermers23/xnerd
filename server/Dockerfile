@@ -15,9 +15,11 @@ RUN apt-get update && apt-get install -y \
 
 # Instala as dependências diretamente no sistema do container
 COPY requirements.txt .
+COPY commands.sh .
 RUN pip install --no-cache-dir -r requirements.txt
+
 
 # Copia o projeto
 COPY . .
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["./commands.sh"]
