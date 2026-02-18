@@ -70,7 +70,7 @@ REST_FRAMEWORK = {
 }
 
 AUTHENTICATION_BACKENDS = [
-    'xnerd_api.backends.EmailOrUsernameModelBackend', # Seu backend novo
+    'app.backends.EmailOrUsernameModelBackend', # Seu backend novo
     'django.contrib.auth.backends.ModelBackend',      # Mantém o padrão por segurança
 ]
 
@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-      "ENGINE": os.getenv("DB_ENGINE",  "django.db.backends.sqlite3"),
+      "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.sqlite3"),
         "NAME": os.getenv("POSTGRES_DB", BASE_DIR / "db.sqlite3"),
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
