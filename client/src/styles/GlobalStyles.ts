@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { colors } from "./theme";
 
 export const GlobalStyles = createGlobalStyle`
@@ -19,4 +19,30 @@ body {
     background: ${colors.gray900};
     color: ${colors.textDefault};
 }
+
+.container-fluid {
+    max-width: auto;
+}
+
+.container {
+    max-width: 98rem;
+    margin: 0 auto;
+}
+
+.content {
+    margin: 3.2rem;
+}
+`
+
+export const breakpoints = {
+  desktop: "1024px",
+  tablet: "768px",
+  mobile: "468px"
+};
+
+export const Main = styled.main`
+  text-align: center;
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
 `

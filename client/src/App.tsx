@@ -1,5 +1,7 @@
+import { Home } from "./pages/home/Home";
+
 export const App = () => {
   return (
-    <h1>XNERD</h1>
+    <Home />
   )
 };
