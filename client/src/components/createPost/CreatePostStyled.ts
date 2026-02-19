@@ -1,14 +1,55 @@
 import styled from "styled-components";
 import { colors } from "../../styles/theme";
 
+export const Container = styled.div`
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 560px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border: solid 1px ${colors.gray500};
+  border-radius: 1.6rem
+`
+
+export const Cabecalho = styled.div`
+  position: sticky;
+  top: 0;
+  background-color: ${colors.gray900};
+  opacity: 0.8;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  border: solid 1px ${colors.gray500};
+`
+
 export const Card = styled.section`
-  max-width: 598px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 1rem auto;
   padding: 1rem 1.6rem;
   border-bottom: solid 1px ${colors.gray500};
+`
+
+export const ListIcons = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+
+  div{
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+    padding: 0 4rem;
+  }
 `
 
 export const ProfileIcon = styled.img`
@@ -26,6 +67,9 @@ export const Button = styled.button`
   border-radius: 1.6rem;
   border: none;
   cursor: pointer;
+  &:hover{
+    background-color: ${colors.linkHover};
+  }
 `
 
 export const Input = styled.textarea`
@@ -44,3 +88,8 @@ export const Input = styled.textarea`
     outline: none;
   }
 `
+
+export const UploadIcon = styled.input`
+  display: none;
+`
+

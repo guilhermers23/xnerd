@@ -19,19 +19,6 @@ body {
     background: ${colors.gray900};
     color: ${colors.textDefault};
 }
-
-.container-fluid {
-    max-width: auto;
-}
-
-.container {
-    max-width: 98rem;
-    margin: 0 auto;
-}
-
-.content {
-    margin: 3.2rem;
-}
 `
 
 export const breakpoints = {
