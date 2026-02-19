@@ -1,17 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../styles/theme";
 
-export const Container = styled.div`
-  margin: 0 auto;
-  padding: 1rem;
-  max-width: 560px;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  border: solid 1px ${colors.gray500};
-  border-radius: 1.6rem
-`
-
 export const Cabecalho = styled.div`
   position: sticky;
   top: 0;
@@ -50,13 +39,6 @@ export const ListIcons = styled.section`
     gap: 1.6rem;
     padding: 0 4rem;
   }
-`
-
-export const ProfileIcon = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
 `
 
 export const Button = styled.button`

@@ -27,9 +27,26 @@ export const breakpoints = {
   mobile: "468px"
 };
 
+export const ProfileIcon = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+`
+
 export const Main = styled.main`
   text-align: center;
   max-width: 1024px;
   width: 100%;
   margin: 0 auto;
+`
+
+export const Container = styled.div`
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 560px;
+  width: 100%;
+  align-items: center;
+  border: solid 1px ${colors.gray500};
+  border-radius: 1.6rem
 `
