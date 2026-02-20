@@ -2,10 +2,10 @@ import { FaRegComment } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsGraphUp } from "react-icons/bs";
-import { ProfileIcon } from "../profileIcon/ProfileIcon";
+import { ProfileIcon } from "../profileIcon";
 import * as Style from "./PostCardStyled";
 
-export const PostCard = () => {
+export const Post = () => {
   return (
     <Style.ContainerCard>
       <ProfileIcon />

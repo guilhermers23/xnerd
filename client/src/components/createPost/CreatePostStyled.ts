@@ -6,7 +6,7 @@ export const Cabecalho = styled.div`
   top: 0;
   background-color: ${colors.gray900};
   opacity: 0.8;
-  max-width: 560px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   font-size: 1.6rem;

@@ -27,13 +27,6 @@ export const breakpoints = {
   mobile: "468px"
 };
 
-export const Main = styled.main`
-  text-align: center;
-  max-width: 1024px;
-  width: 100%;
-  margin: 0 auto;
-`
-
 export const Container = styled.div`
   margin: 0 auto;
   padding: 1rem;

@@ -3,7 +3,7 @@ import { RiMovieAiFill } from "react-icons/ri";
 import { LuImageUp } from "react-icons/lu";
 import { colors } from "../../styles/theme";
 import { Container } from "../../styles/GlobalStyles";
-import { ProfileIcon } from "../profileIcon/ProfileIcon";
+import { ProfileIcon } from "../profileIcon";
 import * as Style from "./CreatePostStyled";
 
 export const CreatePost = () => {
