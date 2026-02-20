@@ -10,6 +10,7 @@ export const ContainerCard = styled(Container)`
 
 export const BodyPost = styled.article`
   display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 1rem;
   align-items: center;
@@ -18,6 +19,21 @@ export const BodyPost = styled.article`
     width: 100%;
     object-fit: cover;
     border-radius: 1rem;
+  }
+
+  div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    align-items: center;
+
+    span{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
   }
 `
 
