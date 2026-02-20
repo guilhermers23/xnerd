@@ -27,13 +27,6 @@ export const breakpoints = {
   mobile: "468px"
 };
 
-export const ProfileIcon = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-`
-
 export const Main = styled.main`
   text-align: center;
   max-width: 1024px;

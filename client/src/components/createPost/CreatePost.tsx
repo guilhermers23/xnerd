@@ -2,7 +2,8 @@ import { useState } from "react";
 import { RiMovieAiFill } from "react-icons/ri";
 import { LuImageUp } from "react-icons/lu";
 import { colors } from "../../styles/theme";
-import { Container, ProfileIcon } from "../../styles/GlobalStyles";
+import { Container } from "../../styles/GlobalStyles";
+import { ProfileIcon } from "../profileIcon/ProfileIcon";
 import * as Style from "./CreatePostStyled";
 
 export const CreatePost = () => {
@@ -29,7 +30,7 @@ export const CreatePost = () => {
       <Style.Cabecalho>Following</Style.Cabecalho>
       <Container>
         <Style.Card>
-          <ProfileIcon src="https://www.gamereactor.pt/media/29/crashbandicoot4_3192963b.png" alt="" />
+          <ProfileIcon />
           <Style.Input name="content" id="" placeholder="What's happening?"
             value={content}
             onChange={(e) => setContent(e.target.value)}
