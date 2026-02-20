@@ -3,11 +3,11 @@ import { Post } from "../../components/posts";
 
 export const Home = () => {
   return (
-    <div>
+    <section>
       <CreatePost />
       <Post />
       <Post />
       <Post />
-    </div>
+    </section>
   )
 };
