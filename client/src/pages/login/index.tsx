@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FloatingInput } from "../../components/input";
-import * as Style from "./LoginStyled";
+import { Form } from "../../components/form";
 
 export const Login = () => {
   const [isFocusedEmail, setIsFocusedEmail] = useState(false);
@@ -8,12 +8,19 @@ export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(email, password);
+  };
+
   return (
-    <Style.FormContainer>
-      <Style.FormCabecalho >
-        <h3>Bem-Vindo de Volta</h3>
-        <p>Insira seu e-mail e senha para acessar sua conta.</p>
-      </Style.FormCabecalho>
+    <Form onSubmit={handleSubmit}
+      title="Bem-vindo de Volta"
+      subtitle="Insira seu e-mail e senha para acessar sua conta."
+      buttonTitle="Entrar"
+      textFooter="Ainda não possui conta?"
+      textLink=" Cadastre-se"
+      path="/register">
 
       <FloatingInput type="email" label="E-mail ou Username" id="email"
         onBlur={() => setIsFocusedEmail(false)}
@@ -34,12 +41,6 @@ export const Login = () => {
         value={password}
         required
       />
-
-      <Style.Button type="submit">Entrar</Style.Button>
-      <Style.FooterForm>
-        <p>Ainda não possui conta?</p>
-        <Style.LinkStyle to="/register"> Cadastre-se</Style.LinkStyle>
-      </Style.FooterForm>
-    </Style.FormContainer>
+    </Form>
   )
 };
