@@ -36,7 +36,6 @@ export const breakpoints = {
 export const Container = styled.div`
   margin: 0 auto;
   padding: 1rem;
-  max-width: 560px;
   width: 100%;
   align-items: center;
   border: solid 1px ${colors.gray500};
