@@ -4,6 +4,7 @@ import { colors } from "../../../styles/theme";
 export const AuthContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-content: center;
 `
 
 export const FormGrup = styled.section`
@@ -11,7 +12,7 @@ export const FormGrup = styled.section`
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    height: 98vh;
+    height: 100vh;
     padding: 1rem;
 `
 
@@ -31,12 +32,13 @@ export const BackgroundAuth = styled.div`
     border-radius: 5rem;
     padding: 1rem;
     width: 100%;
-    height: 100%;
+    height: 99vh;
     object-fit: cover;
   }
 `
 
 export const Footer = styled.footer`
+font-size: 1.4rem;
   color: ${colors.gray300};
   padding: 1rem;
 `

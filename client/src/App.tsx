@@ -4,16 +4,15 @@ import { store } from "./store";
 import { LayoutDefault } from "./components/layouts/layoutDefault";
 import { Home } from "./pages/home";
 import { Login } from "./pages/login";
-import { AuthLayout } from "./components/layouts/authLayout";
+import { Register } from "./pages/register";
 
 export const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<AuthLayout />}>
-            <Route index element={<Login />} />
-          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<LayoutDefault />}>
             <Route index element={<Home />} />
           </Route>

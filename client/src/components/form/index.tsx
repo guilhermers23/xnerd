@@ -1,3 +1,4 @@
+import { AuthLayout } from "../layouts/authLayout";
 import * as Style from "./FormStyled";
 
 type Props = {
@@ -13,17 +14,19 @@ type Props = {
 
 export const Form = ({ title, subtitle, buttonTitle, children, onSubmit, textFooter, textLink, path }: Props) => {
   return (
-    <Style.FormContainer onSubmit={onSubmit}>
-      <Style.FormCabecalho >
-        <h3>{title}</h3>
-        <p>{subtitle}</p>
-      </Style.FormCabecalho>
-      {children}
-      <Style.Button type="submit">{buttonTitle}</Style.Button>
-      <Style.FooterForm>
-        <p>{textFooter}</p>
-        <Style.LinkStyle to={path}> {textLink}</Style.LinkStyle>
-      </Style.FooterForm>
-    </Style.FormContainer>
+    <AuthLayout>
+      <Style.FormContainer onSubmit={onSubmit}>
+        <Style.FormCabecalho >
+          <h3>{title}</h3>
+          <p>{subtitle}</p>
+        </Style.FormCabecalho>
+        {children}
+        <Style.Button type="submit">{buttonTitle}</Style.Button>
+        <Style.FooterForm>
+          <p>{textFooter}</p>
+          <Style.LinkStyle to={path}> {textLink}</Style.LinkStyle>
+        </Style.FooterForm>
+      </Style.FormContainer>
+    </AuthLayout>
   )
 };
