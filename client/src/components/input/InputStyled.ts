@@ -7,6 +7,7 @@ export const InputContainer = styled.div`
   position: relative;
   margin-top: 2rem;
   font-family: sans-serif;
+  width: 100%;
 `
 
 // 2. Estilização do Rótulo (Label)

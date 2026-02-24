@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FloatingInput } from "../../components/input";
+import * as Style from "./LoginStyled";
 
 export const Login = () => {
   const [isFocusedEmail, setIsFocusedEmail] = useState(false);
@@ -8,8 +9,12 @@ export const Login = () => {
   const [password, setPassword] = useState('');
 
   return (
-    <form>
-      <span>Realize o login para continuar</span>
+    <Style.FormContainer>
+      <Style.FormCabecalho >
+        <h3>Bem-Vindo de Volta</h3>
+        <p>Insira seu e-mail e senha para acessar sua conta.</p>
+      </Style.FormCabecalho>
+
       <FloatingInput type="email" label="E-mail ou Username" id="email"
         onBlur={() => setIsFocusedEmail(false)}
         onFocus={() => setIsFocusedEmail(true)}
@@ -17,6 +22,7 @@ export const Login = () => {
         isFocused={isFocusedEmail}
         hasValue={email.length > 0}
         value={email}
+        required
       />
 
       <FloatingInput type="password" label="Senha" id="password"
@@ -26,7 +32,14 @@ export const Login = () => {
         isFocused={isFocusedPassword}
         hasValue={password.length > 0}
         value={password}
+        required
       />
-    </form>
+
+      <Style.Button type="submit">Entrar</Style.Button>
+      <Style.FooterForm>
+        <p>Ainda não possui conta?</p>
+        <Style.LinkStyle to="/register"> Cadastre-se</Style.LinkStyle>
+      </Style.FooterForm>
+    </Style.FormContainer>
   )
 };
