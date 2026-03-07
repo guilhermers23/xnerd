@@ -1,16 +1,39 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import Cookies from "js-cookie";
+import { useLoginMutation } from "../../services/Auth.Service";
 import { FloatingInput } from "../../components/input";
 import { Form } from "../../components/form";
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const [login, { isError, isLoading, isSuccess }] = useLoginMutation();
   const [isFocusedEmail, setIsFocusedEmail] = useState(false);
   const [isFocusedPassword, setIsFocusedPassword] = useState(false);
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email, password);
+    e.stopPropagation();
+    const data = { username, password };
+    console.log(data);
+    const res = await login(data);
+
+    try {
+      console.log(res);
+      if (res.error) {
+        console.error(res.error);
+        return;
+      }
+
+      Cookies.set("token", res.data.access, { expires: 1 }); // Access res.data safely
+      Cookies.set("refresh", res.data.refresh);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      return;
+    }
   };
 
   return (
@@ -20,15 +43,16 @@ export const Login = () => {
       buttonTitle="Entrar"
       textFooter="Ainda não possui conta?"
       textLink=" Cadastre-se"
-      path="/register">
+      path="/register"
+      disabled={isLoading}>
 
       <FloatingInput type="email" label="E-mail ou Username" id="email"
         onBlur={() => setIsFocusedEmail(false)}
         onFocus={() => setIsFocusedEmail(true)}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
         isFocused={isFocusedEmail}
-        hasValue={email.length > 0}
-        value={email}
+        hasValue={username.length > 0}
+        value={username}
         required
       />
 

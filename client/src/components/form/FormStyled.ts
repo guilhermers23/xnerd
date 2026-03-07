@@ -1,5 +1,5 @@
+import { colors } from './../../styles/theme';
 import styled from "styled-components";
-import { colors } from "../../styles/theme";
 import { Link } from "react-router";
 
 export const FormContainer = styled.form`
@@ -43,6 +43,11 @@ export const Button = styled.button`
 
   &:hover{
     background-color: ${colors.primary};
+  }
+
+  &:disabled{
+    background-color: ${colors.error};
+    cursor: not-allowed;
   }
 `
 

@@ -1,4 +1,4 @@
-declare interface IUser {
+export interface IUser {
   id: number;
   name: string;
   username: string;
@@ -8,14 +8,4 @@ declare interface IUser {
   profile_image: string;
   birth_date: string;
   following: string;
-}
-
-declare interface IPost {
-  id: number;
-  user: IUser;
-  midia: string;
-  content: string;
-  creation_at: Date;
-  likes: number;
-  parent: number;
-}
+};

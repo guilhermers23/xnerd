@@ -10,9 +10,10 @@ type Props = {
   textFooter: string,
   textLink: string,
   path: string,
+  disabled: boolean
 };
 
-export const Form = ({ title, subtitle, buttonTitle, children, onSubmit, textFooter, textLink, path }: Props) => {
+export const Form = ({ title, subtitle, buttonTitle, children, onSubmit, textFooter, textLink, path, disabled }: Props) => {
   return (
     <AuthLayout>
       <Style.FormContainer onSubmit={onSubmit}>
@@ -21,7 +22,7 @@ export const Form = ({ title, subtitle, buttonTitle, children, onSubmit, textFoo
           <p>{subtitle}</p>
         </Style.FormCabecalho>
         {children}
-        <Style.Button type="submit">{buttonTitle}</Style.Button>
+        <Style.Button type="submit" disabled={disabled}>{buttonTitle}</Style.Button>
         <Style.FooterForm>
           <p>{textFooter}</p>
           <Style.LinkStyle to={path}> {textLink}</Style.LinkStyle>
