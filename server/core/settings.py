@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import sqlite3
 from dotenv import load_dotenv # 1. Importe a função
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -109,6 +110,22 @@ DATABASES = {
         "HOST": os.getenv("POSTGRES_HOST"),
         "PORT": os.getenv("POSTGRES_PORT"),
     }
+}
+
+SIMPLE_JWT = {
+    # Tempo que o token de acesso (o que vai no Header) dura
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=24),
+    
+    # Tempo que o Refresh Token dura (usado para pegar um novo Access)
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    
+    # Se True, ao renovar o Access, você recebe um novo Refresh também
+    'ROTATE_REFRESH_TOKENS': True,
+    
+    # Se True, o Refresh Token antigo entra numa "lista negra" após o uso
+    'BLACKLIST_AFTER_ROTATION': True,
+    
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 # Password validation
