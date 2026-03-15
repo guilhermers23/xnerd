@@ -6,14 +6,14 @@ type Props = {
   subtitle: string,
   buttonTitle: string,
   children: React.ReactNode,
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
   textFooter: string,
   textLink: string,
   path: string,
-  disabled: boolean
+  disabled: boolean,
+  onSubmit: () => void;
 };
 
-export const Form = ({ title, subtitle, buttonTitle, children, onSubmit, textFooter, textLink, path, disabled }: Props) => {
+export const Form = ({ title, subtitle, buttonTitle, children, textFooter, textLink, path, disabled, onSubmit }: Props) => {
   return (
     <AuthLayout>
       <Style.FormContainer onSubmit={onSubmit}>

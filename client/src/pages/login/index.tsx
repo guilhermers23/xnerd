@@ -1,43 +1,35 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import Cookies from "js-cookie";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { useLoginMutation } from "../../services/Auth.Service";
 import { FloatingInput } from "../../components/input";
 import { Form } from "../../components/form";
 
+interface IData { username: string, password: string };
+
 export const Login = () => {
   const navigate = useNavigate();
-  const [login, { isError, isLoading, isSuccess }] = useLoginMutation();
-  const [isFocusedEmail, setIsFocusedEmail] = useState(false);
-  const [isFocusedPassword, setIsFocusedPassword] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [login, { isError, isLoading }] = useLoginMutation();
+  const { register, handleSubmit, reset } = useForm<IData>();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const data = { username, password };
-    console.log(data);
+  const onSubmit: SubmitHandler<IData> = async (data) => {
     const res = await login(data);
-
-    try {
-      console.log(res);
-      if (res.error) {
-        console.error(res.error);
-        return;
-      }
-
-      Cookies.set("token", res.data.access, { expires: 1 }); // Access res.data safely
-      Cookies.set("refresh", res.data.refresh);
-      navigate("/");
-    } catch (error) {
-      console.error(error);
+    if (isError) {
+      console.log(res.error);
+      alert(res.error.data.detail);
       return;
-    }
+    };
+
+    if ("data" in res && res.data) {
+      Cookies.set("token", res.data.access, { expires: 1 }); // Access res.data safely
+      Cookies.set("refresh", res.data.refresh, { expires: 7 });
+      reset();
+      navigate("/");
+    };
   };
 
   return (
-    <Form onSubmit={handleSubmit}
+    <Form onSubmit={handleSubmit(onSubmit)}
       title="Bem-vindo de Volta"
       subtitle="Insira seu e-mail e senha para acessar sua conta."
       buttonTitle="Entrar"
@@ -47,22 +39,12 @@ export const Login = () => {
       disabled={isLoading}>
 
       <FloatingInput type="email" label="E-mail ou Username" id="email"
-        onBlur={() => setIsFocusedEmail(false)}
-        onFocus={() => setIsFocusedEmail(true)}
-        onChange={(e) => setUsername(e.target.value)}
-        isFocused={isFocusedEmail}
-        hasValue={username.length > 0}
-        value={username}
+        {...register("username")}
         required
       />
 
       <FloatingInput type="password" label="Senha" id="password"
-        onBlur={() => setIsFocusedPassword(false)}
-        onFocus={() => setIsFocusedPassword(true)}
-        onChange={(e) => setPassword(e.target.value)}
-        isFocused={isFocusedPassword}
-        hasValue={password.length > 0}
-        value={password}
+        {...register("password")}
         required
       />
     </Form>

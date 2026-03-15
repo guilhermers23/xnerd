@@ -14,7 +14,7 @@ export const AuthService = APISevice.injectEndpoints({
       invalidatesTags: ["User"]
     }),
 
-    register: builder.mutation<AuthUser, IUser>({
+    register: builder.mutation<AuthUser, Omit<IUser, "id">>({
       query: (body) => ({
         url: "auth/register/",
         method: "POST",
