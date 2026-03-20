@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { RiMovieAiFill } from "react-icons/ri";
 import { LuImageUp } from "react-icons/lu";
 import { colors } from "../../styles/theme";
@@ -6,58 +6,62 @@ import { Container } from "../../styles/GlobalStyles";
 import { ProfileIcon } from "../profileIcon";
 import * as Style from "./CreatePostStyled";
 
-export const CreatePost = () => {
-  const [content, setContent] = useState('');
-  const [file, setFile] = useState<FileList | null>(null);
+interface IData { content: string, file_image: FileList, file_video: FileList };
 
-  const publishPost = () => {
-    if (content.length < 3) {
+export const CreatePost = () => {
+  const { handleSubmit, register, reset, formState: { errors } } = useForm<IData>();
+
+  const publishPost: SubmitHandler<IData> = (data) => {
+    if (data.content.length < 3) {
       alert('Campo deve possui no mínimo 3 caracteres.')
       return;
     };
+    console.log('Form data:', data);
 
-    const formData = new FormData();
-    if (file) {
-      formData.append('file', file[0])
+    // Para acessar o arquivo:
+    if (data.file_image && data.file_image.length > 0) {
+      const file = data.file_image[0];
+      console.log('Arquivo selecionado:', file.name, file.size, file.type);
     };
-
-    const data = { content, file };
-    console.log(data);
   };
 
   return (
     <>
       <Style.Cabecalho>Following</Style.Cabecalho>
-      <Container>
-        <Style.Card>
-          <ProfileIcon />
-          <Style.Input name="content" id="" placeholder="What's happening?"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></Style.Input>
-        </Style.Card>
-        <Style.ListIcons>
+      <form onSubmit={handleSubmit(publishPost)}>
+        <Container>
+          <Style.Card>
+            <ProfileIcon />
 
-          <div>
-            <span>
-              <label htmlFor="file-upload-image">
-                <LuImageUp size={25} color={colors.info} cursor="pointer" title="Selecionar uma imagem" />
-              </label>
-              <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
-                onChange={(e) => setFile(e.target.files)} />
-            </span>
+            <Style.Input id="content" placeholder="What's happening?"
+              {...register("content")}
+            ></Style.Input>
+          </Style.Card>
+          <Style.ListIcons>
 
-            <span>
-              <label htmlFor="file-upload-video">
-                <RiMovieAiFill size={25} color={colors.info} cursor="pointer" title="Selecionar um vídeo" />
-              </label>
-              <Style.UploadIcon id="file-upload-video" type="file" accept="video/*"
-                onChange={(e) => setFile(e.target.files)} />
-            </span>
-          </div>
-          <Style.Button onClick={publishPost}>Post</Style.Button>
-        </Style.ListIcons>
-      </Container>
+            <div>
+              <span>
+                <label htmlFor="file-upload-image">
+                  <LuImageUp size={25} color={colors.info} cursor="pointer" title="Selecionar uma imagem" />
+                </label>
+                <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
+                  {...register("file_image")}
+                />
+              </span>
+
+              <span>
+                <label htmlFor="file-upload-video">
+                  <RiMovieAiFill size={25} color={colors.info} cursor="pointer" title="Selecionar um vídeo" />
+                </label>
+                <Style.UploadIcon id="file-upload-video" type="file" accept="video/*"
+                  {...register("file_video")} />
+              </span>
+
+            </div>
+            <Style.Button type="submit">Post</Style.Button>
+          </Style.ListIcons>
+        </Container >
+      </form>
     </>
   )
 };
