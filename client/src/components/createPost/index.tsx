@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { RiMovieAiFill } from "react-icons/ri";
 import { LuImageUp } from "react-icons/lu";
 import { colors } from "../../styles/theme";
@@ -8,7 +8,16 @@ import * as Style from "./CreatePostStyled";
 
 export const CreatePost = () => {
   const [content, setContent] = useState('');
-  const [file, setFile] = useState<FileList | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | undefined>(undefined);
+
+  const onchangeFile = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setFile(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
 
   const publishPost = () => {
     if (content.length < 3) {
@@ -18,11 +27,11 @@ export const CreatePost = () => {
 
     const formData = new FormData();
     if (file) {
-      formData.append('file', file[0])
+      formData.append('file', file)
+      formData.append('content', content);
     };
 
-    const data = { content, file };
-    console.log(data);
+    console.log(formData);
   };
 
   return (
@@ -31,20 +40,29 @@ export const CreatePost = () => {
       <Container>
         <Style.Card>
           <ProfileIcon />
-          <Style.Input name="content" id="" placeholder="What's happening?"
+          <Style.Input name="content" id="content" placeholder="What's happening?"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           ></Style.Input>
         </Style.Card>
-        <Style.ListIcons>
+        {preview && (
+          <Style.Preview>
+            <Style.Close src="/close.png" alt="Close" onClick={() => {
+              setFile(null)
+              setPreview(undefined)
+            }} />
+            <Style.PreviewFile src={preview} alt="Preview do arquivo" />
+          </Style.Preview>
+        )}
 
+        <Style.ListIcons>
           <div>
             <span>
               <label htmlFor="file-upload-image">
                 <LuImageUp size={25} color={colors.info} cursor="pointer" title="Selecionar uma imagem" />
               </label>
               <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
-                onChange={(e) => setFile(e.target.files)} />
+                onChange={onchangeFile} />
             </span>
 
             <span>
@@ -52,7 +70,7 @@ export const CreatePost = () => {
                 <RiMovieAiFill size={25} color={colors.info} cursor="pointer" title="Selecionar um vídeo" />
               </label>
               <Style.UploadIcon id="file-upload-video" type="file" accept="video/*"
-                onChange={(e) => setFile(e.target.files)} />
+                onChange={onchangeFile} />
             </span>
           </div>
           <Style.Button onClick={publishPost}>Post</Style.Button>
