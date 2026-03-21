@@ -75,3 +75,24 @@ export const UploadIcon = styled.input`
   display: none;
 `
 
+export const Preview = styled.span`
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: end;
+`
+
+export const Close = styled.img`
+  position: absolute;
+  top: .5rem;
+  right: 1rem;
+  height: 5rem;
+  width: 5rem;
+  cursor: pointer;
+  `
+
+export const PreviewFile = styled.img`
+  width: 100%;
+  padding: 1rem;
+  object-fit: cover;
+`
