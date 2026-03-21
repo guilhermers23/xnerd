@@ -15,7 +15,6 @@ export const Home = () => {
   useEffect(() => {
     if (Cookies.get("token") && getUser) dispatch(setUser(getUser));
     if (!Cookies.get("token") && getUser) dispatch(logout());
-
   }, [getUser, dispatch])
 
   console.log(`Olá ${getUser?.name}`);

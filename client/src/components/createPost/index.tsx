@@ -19,11 +19,12 @@ export const CreatePost = () => {
     }
   };
 
-  const publishPost = () => {
-    if (content.length < 3) {
+  const publishPost: SubmitHandler<IData> = (data) => {
+    if (data.content.length < 3) {
       alert('Campo deve possui no mínimo 3 caracteres.')
       return;
     };
+    console.log('Form data:', data);
 
     const formData = new FormData();
     if (file) {
