@@ -1,12 +1,14 @@
 import { useState, type ChangeEvent } from "react";
 import { RiMovieAiFill } from "react-icons/ri";
 import { LuImageUp } from "react-icons/lu";
+import { usePostMutation } from "../../services/Post.Service";
 import { colors } from "../../styles/theme";
 import { Container } from "../../styles/GlobalStyles";
 import { ProfileIcon } from "../profileIcon";
 import * as Style from "./CreatePostStyled";
 
 export const CreatePost = () => {
+  const [makePost] = usePostMutation();
   const [content, setContent] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | undefined>(undefined);
@@ -19,20 +21,32 @@ export const CreatePost = () => {
     }
   };
 
-  const publishPost: SubmitHandler<IData> = (data) => {
-    if (data.content.length < 3) {
+  const publishPost = async () => {
+    if (content.length < 3) {
       alert('Campo deve possui no mínimo 3 caracteres.')
       return;
     };
-    console.log('Form data:', data);
 
     const formData = new FormData();
     if (file) {
-      formData.append('file', file)
+      formData.append('midia', file)
       formData.append('content', content);
     };
 
-    console.log(formData);
+    try {
+      const res = await makePost(formData);
+      console.log(res.data);
+
+    } catch (error) {
+      console.error(error)
+      alert("Ocorreu erro ao realizar Postagem!");
+      return;
+    }
+
+    alert("Postagem realizada com sucesso!");
+    setFile(null);
+    setPreview(undefined);
+    setContent("");
   };
 
   return (
