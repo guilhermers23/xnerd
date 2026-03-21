@@ -1,8 +1,10 @@
 import * as Style from "./ProfileIconStyled";
 
-export const ProfileIcon = () => {
+export const ProfileIcon = (props: { urlImage: string | undefined }) => {
+  const srcUlr = props.urlImage ? props.urlImage : "/avatar_default.jpg";
+
   return (
-    <Style.ProfileIcon src="https://www.gamereactor.pt/media/29/crashbandicoot4_3192963b.png"
+    <Style.ProfileIcon src={srcUlr}
       alt="Avatar do Perfil" />
   )
 };

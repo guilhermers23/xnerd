@@ -6,6 +6,6 @@ export interface IPost {
   midia: string;
   content: string;
   creation_at: Date;
-  likes: number;
-  parent: number;
+  likes_count: number;
+  comments_count: number;
 };

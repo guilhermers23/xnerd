@@ -38,6 +38,6 @@ export const Container = styled.div`
   padding: 1rem;
   width: 100%;
   align-items: center;
-  border: solid 1px ${colors.gray500};
+  border: solid 1px ${colors.gray100};
   border-radius: 1.6rem
 `

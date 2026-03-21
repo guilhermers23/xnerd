@@ -4,45 +4,45 @@ import { colors } from "../../styles/theme";
 
 export const ContainerCard = styled(Container)`
   display: flex;
-  justify-content: flex-start;
   align-items: flex-start;
+  width: 100%;
 `
 
 export const BodyPost = styled.article`
   display: flex;
-  flex-direction: column;
   width: 100%;
+  flex-direction: column;
   padding: 1rem;
-  align-items: center;
 
   img{
     width: 100%;
     object-fit: cover;
     border-radius: 1rem;
   }
+`
 
-  div{
-    width: 100%;
+export const IconsList = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  align-items: center;
+
+  span{
     display: flex;
-    justify-content: space-between;
-    padding-top: 1rem;
     align-items: center;
-
-    span{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
+    justify-content: center;
+    gap: .5rem;
     }
-  }
 `
 
 export const HeaderPost = styled.span`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   text-align: left;
 
   h3{

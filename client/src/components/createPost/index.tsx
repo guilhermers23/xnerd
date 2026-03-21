@@ -2,12 +2,14 @@ import { useState, type ChangeEvent } from "react";
 import { RiMovieAiFill } from "react-icons/ri";
 import { LuImageUp } from "react-icons/lu";
 import { usePostMutation } from "../../services/Post.Service";
+import { useGetMeQuery } from "../../services/Auth.Service";
 import { colors } from "../../styles/theme";
 import { Container } from "../../styles/GlobalStyles";
 import { ProfileIcon } from "../profileIcon";
 import * as Style from "./CreatePostStyled";
 
 export const CreatePost = () => {
+  const { data: user, error, isLoading } = useGetMeQuery();
   const [makePost] = usePostMutation();
   const [content, setContent] = useState('');
   const [file, setFile] = useState<File | null>(null);
@@ -54,7 +56,7 @@ export const CreatePost = () => {
       <Style.Cabecalho>Following</Style.Cabecalho>
       <Container>
         <Style.Card>
-          <ProfileIcon />
+          <ProfileIcon urlImage={user?.profile_image} />
           <Style.Input name="content" id="content" placeholder="What's happening?"
             value={content}
             onChange={(e) => setContent(e.target.value)}

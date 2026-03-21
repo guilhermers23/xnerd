@@ -1,3 +1,4 @@
+import type { IPost } from "../types/IPost";
 import { APISevice } from "./API.service";
 
 export const PostService = APISevice.injectEndpoints({
@@ -11,7 +12,12 @@ export const PostService = APISevice.injectEndpoints({
       invalidatesTags: ["Posts"]
     }),
 
+    getPosts: builder.query<IPost[], void>({
+      query: () => "feed/",
+      providesTags: ["Posts"]
+    }),
+
   })
 });
 
-export const { usePostMutation } = PostService;
+export const { usePostMutation, useGetPostsQuery } = PostService;
