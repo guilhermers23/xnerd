@@ -79,7 +79,7 @@ export const Preview = styled.span`
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: end;
+  align-items: center;
 `
 
 export const Close = styled.img`
@@ -92,7 +92,8 @@ export const Close = styled.img`
   `
 
 export const PreviewFile = styled.img`
-  width: 100%;
+  max-width: 100%;
   padding: 1rem;
   object-fit: cover;
+  max-height: 500px;
 `
