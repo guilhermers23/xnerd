@@ -28,14 +28,14 @@ export const SideBar = () => {
           <Link to="/">
             <li><LuUserPlus size={35} />Seguir</li>
           </Link>
-          <Link to="/">
+          <Link to="/me">
             <li><FaRegUser size={35} />Perfil</li>
           </Link>
         </Style.ListMenu>
       </nav>
 
       <Style.Account>
-        <ProfileIcon />
+        <ProfileIcon urlImage="" />
         <span>
           <b>Guilheme R.Silva</b>
           <p>@guilhermers23</p>
