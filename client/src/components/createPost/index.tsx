@@ -73,23 +73,13 @@ export const CreatePost = () => {
         )}
 
         <Style.ListIcons>
-          <div>
-            <span>
-              <label htmlFor="file-upload-image">
-                <LuImageUp size={25} color={colors.info} cursor="pointer" title="Selecionar uma imagem" />
-              </label>
-              <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
-                onChange={onchangeFile} />
-            </span>
-
-            <span>
-              <label htmlFor="file-upload-video">
-                <RiMovieAiFill size={25} color={colors.info} cursor="pointer" title="Selecionar um vídeo" />
-              </label>
-              <Style.UploadIcon id="file-upload-video" type="file" accept="video/*"
-                onChange={onchangeFile} />
-            </span>
-          </div>
+          <span>
+            <label htmlFor="file-upload-image">
+              <LuImageUp size={25} color={colors.info} cursor="pointer" title="Selecionar uma imagem" />
+            </label>
+            <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
+              onChange={onchangeFile} />
+          </span>
           <Style.Button onClick={publishPost}>Post</Style.Button>
         </Style.ListIcons>
       </Container>
