@@ -4,8 +4,8 @@ export interface IUser {
   username: string;
   email: string;
   readonly password: string;
-  cover: string;
-  profile_image: string;
+  cover: string | null;
+  profile_image: string | null;
   birth_date: string;
   following: string;
 };

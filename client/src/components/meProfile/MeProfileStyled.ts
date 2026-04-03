@@ -5,7 +5,7 @@ import { colors } from "../../styles/theme";
 interface PropsCover { isCover: string };
 
 export const Avatar = styled(ProfileIcon)`
-  position: absolute;
+  position: relative;
   width: 14rem;
   height: 14rem;
   border: 3px solid ${colors.gray900};
@@ -49,5 +49,41 @@ export const ProfileInfo = styled.div`
     margin-top: 1rem;
     color: ${colors.gray200};
     font-weight: 400;
+  }
+`
+
+export const EditCover = styled.span`
+  position: absolute;
+  opacity: .7;
+  right: .2rem;
+  top: .2rem;
+  padding: .5rem;
+  border-radius: 35%;
+  background-color: #00000059;
+  transition: all ease-in .2s;
+
+    &:hover{
+    opacity: .9;
+    transition: all ease-in .2s;
+  }
+`
+
+export const InputNone = styled.input`
+  display: none;
+`
+
+export const EditAvatar = styled.span`
+  position: absolute;
+  opacity: 0;
+  top: 12rem;
+  width: 100%;
+  align-items: center;
+  left: 6rem;
+  padding: 1rem;
+  transition: all ease-in .2s;
+
+  &:hover{
+    opacity: .4;
+    transition: all ease-in .2s;
   }
 `

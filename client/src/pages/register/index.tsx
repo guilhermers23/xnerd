@@ -10,12 +10,13 @@ interface IData extends Omit<IUser, 'id'> { confirmPassword: string };
 
 export const Register = () => {
   const navigate = useNavigate();
-  const [registerService, { isError, isLoading }] = useRegisterMutation();
+  const [registerService, { isLoading }] = useRegisterMutation();
+
   const { handleSubmit, register, reset } = useForm<IData>({
     defaultValues: {
-      cover: undefined,
+      cover: null,
       following: "0",
-      profile_image: undefined
+      profile_image: null,
     }
   }
   );
@@ -27,7 +28,7 @@ export const Register = () => {
       const res = await registerService(data);
       console.log(res);
 
-      if (isError) {
+      if (res.error) {
         console.log(res.error);
         alert("Ocorreu erro ao tentar realizar cadastrado.");
         return;

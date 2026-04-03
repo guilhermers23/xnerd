@@ -1,11 +1,20 @@
 import { MeProfile } from "../../components/meProfile";
+import { useGetMeQuery } from "../../services/Auth.Service";
 
 export const Profile = () => {
+  const { data: getUser, error, isLoading } = useGetMeQuery();
+
   return (
-    <MeProfile id={2} cover="undefined"
-      following="2"
-      name="Guilherme Rosa da Silva"
-      profile_image="/avatar_default.jpg"
-      username="@guilhermers2014" />
+    <>
+      {isLoading && "Carregando..."}
+      {getUser && !error ?
+        <MeProfile id={getUser?.id} cover={getUser?.cover}
+          following={getUser?.following}
+          name={getUser?.name}
+          profile_image={getUser?.profile_image}
+          username={getUser?.username}
+        />
+        : "Ocorreu um erro ao processar os dados!"}
+    </>
   )
 };

@@ -1,5 +1,4 @@
 import { useState, type ChangeEvent } from "react";
-import { RiMovieAiFill } from "react-icons/ri";
 import { LuImageUp } from "react-icons/lu";
 import { usePostMutation } from "../../services/Post.Service";
 import { useGetMeQuery } from "../../services/Auth.Service";
