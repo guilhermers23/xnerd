@@ -1,8 +1,9 @@
+import { colors } from './../../styles/theme';
 import styled from "styled-components";
 import { ProfileIcon } from "../profileIcon/ProfileIconStyled";
-import { colors } from "../../styles/theme";
 
 interface PropsCover { isCover: string };
+interface PropsButton { type: "salvar" | "cancelar", isDisabled: boolean };
 
 export const Avatar = styled(ProfileIcon)`
   position: relative;
@@ -32,9 +33,12 @@ export const ProfileHeader = styled.header`
   padding: 2rem;
 `
 
-export const Span = styled.span`
+export const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   width: 100%;
-  height: 2rem;
+  min-height: 2rem;
 `
 
 export const ProfileInfo = styled.div`
@@ -85,5 +89,22 @@ export const EditAvatar = styled.span`
   &:hover{
     opacity: .4;
     transition: all ease-in .2s;
+  }
+`
+
+export const ButtonEdit = styled.button<PropsButton>`
+  z-index: 1;
+  display: ${props => (props.isDisabled == true) ? "none" : "true"};
+  padding: .5rem 1rem;
+  border-radius: 2rem;
+  margin: .5rem;
+  background-color: ${props => props.type == "salvar" ? `${colors.success}` : `${colors.red}`};
+  border: none;
+  cursor: pointer;
+  transition: all ease-in-out .2s;
+
+  &:hover{
+    transition: all ease-in-out .2s;
+    background-color: ${props => props.type == "salvar" ? `${colors.primary}` : `${colors.error}`};
   }
 `
