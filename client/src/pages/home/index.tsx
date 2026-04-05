@@ -12,7 +12,7 @@ import { useEffect } from "react";
 export const Home = () => {
   const dispatch = useDispatch();
   const { data: posts, isLoading: loadingPosts, error: postError } = useGetPostsQuery();
-  const { data: getUser, error: userError, isLoading: userLoading } = useGetMeQuery();
+  const { data: getUser } = useGetMeQuery();
 
   useEffect(() => {
     if (Cookies.get("token") && getUser) dispatch(setUser(getUser));

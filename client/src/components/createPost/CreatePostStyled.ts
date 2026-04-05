@@ -52,6 +52,10 @@ export const Button = styled.button`
   &:hover{
     background-color: ${colors.linkHover};
   }
+
+  &:disabled{
+    cursor: not-allowed;
+  }
 `
 
 export const Input = styled.textarea`

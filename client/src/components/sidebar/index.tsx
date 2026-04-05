@@ -6,9 +6,12 @@ import { TbSearch } from "react-icons/tb";
 import { RiNotification4Line } from "react-icons/ri";
 import { LuUserPlus } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
+import { useGetMeQuery } from "../../services/Auth.Service";
 import * as Style from "./Sidebar";
 
 export const SideBar = () => {
+  const { data: getUser } = useGetMeQuery();
+
   return (
     <Style.SideMenu>
       <nav>
@@ -35,10 +38,10 @@ export const SideBar = () => {
       </nav>
 
       <Style.Account>
-        <ProfileIcon urlImage="" />
+        <ProfileIcon urlImage={getUser?.profile_image} />
         <span>
-          <b>Guilheme R.Silva</b>
-          <p>@guilhermers23</p>
+          <b>{getUser?.name}</b>
+          <p>{getUser?.username}</p>
         </span>
       </Style.Account>
 
