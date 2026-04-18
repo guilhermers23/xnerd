@@ -14,9 +14,7 @@ export const Post = ({ user, content, midia, comments_count, likes_count }: Omit
         <h4>{user.name} <i>{user.username}</i></h4>
         <p>{content}</p>
         <Style.BodyPost>
-          {midia && (
-            <img src={midia} alt="Mídia da Postagem" />
-          )}
+          {midia && <img src={midia} alt="Mídia da Postagem" />}
         </Style.BodyPost>
         <Style.IconsList>
           <span> <FaRegComment size={20} cursor="pointer" title="Comentários" /> {comments_count} </span>

@@ -3,7 +3,7 @@ import { FaRegEdit } from "react-icons/fa";
 import type { IUser } from "../../types/IUser";
 import { useImageUpload } from "./functions";
 import * as Style from "./MeProfileStyled";
-import { useUpdateMeMutation } from "../../services/Auth.Service";
+import { useUpdateMeMutation } from "../../services/Users.Service";
 
 export const MeProfile = ({ cover, name, username, profile_image, following }: Omit<IUser, "email" | "password" | "birth_date">) => {
   const [updateMe] = useUpdateMeMutation();

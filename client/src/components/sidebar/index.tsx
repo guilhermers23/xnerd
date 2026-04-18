@@ -6,7 +6,7 @@ import { TbSearch } from "react-icons/tb";
 import { RiNotification4Line } from "react-icons/ri";
 import { LuUserPlus } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
-import { useGetMeQuery } from "../../services/Auth.Service";
+import { useGetMeQuery } from "../../services/Users.Service";
 import * as Style from "./Sidebar";
 
 export const SideBar = () => {
@@ -28,7 +28,7 @@ export const SideBar = () => {
           <Link to="/">
             <li> <RiNotification4Line size={35} />Notificaçoes</li>
           </Link>
-          <Link to="/">
+          <Link to="/connect_people">
             <li><LuUserPlus size={35} />Seguir</li>
           </Link>
           <Link to="/me">

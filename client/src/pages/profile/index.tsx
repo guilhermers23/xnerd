@@ -1,5 +1,5 @@
 import { MeProfile } from "../../components/meProfile";
-import { useGetMeQuery } from "../../services/Auth.Service";
+import { useGetMeQuery } from "../../services/Users.Service";
 
 export const Profile = () => {
   const { data: getUser, error, isLoading } = useGetMeQuery();

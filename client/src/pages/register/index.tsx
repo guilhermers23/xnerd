@@ -1,8 +1,11 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { useRegisterMutation } from "../../services/Auth.Service"
+
 import type { IUser } from "../../types/IUser";
+
+import { useRegisterMutation } from "../../services/Auth.Service"
 import { genereteUsername } from "../../utils/ultilsFuction";
+
 import { Form } from "../../components/form";
 import { FloatingInput } from "../../components/input";
 

@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 
-import { useGetMeQuery } from "../../services/Auth.Service";
+
+import { useGetMeQuery } from "../../services/Users.Service";
 import { useGetPostsQuery } from "../../services/Post.Service";
 import { logout, setUser } from "../../store/reducers/user";
 

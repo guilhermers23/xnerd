@@ -6,6 +6,7 @@ import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Profile } from "./pages/profile";
+import { Follow } from "./pages/follow";
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
           <Route path="/" element={<LayoutDefault />}>
             <Route index element={<Home />} />
             <Route path="/me" element={<Profile />} />
+            <Route path="/connect_people" element={<Follow />} />
           </Route>
         </Routes>
       </BrowserRouter>

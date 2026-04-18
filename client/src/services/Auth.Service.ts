@@ -22,21 +22,7 @@ export const AuthService = APISevice.injectEndpoints({
       }),
       invalidatesTags: ["User"]
     }),
-
-    getMe: builder.query<IUser, void>({
-      query: () => "me/",
-      providesTags: ["User"], // Isso ajuda o Redux a saber quando atualizar os dados
-    }),
-
-    updateMe: builder.mutation<IUser, Partial<IUser>>({
-      query: (body) => ({
-        url: "me/",
-        method: "PATCH",
-        body,
-      }),
-      invalidatesTags: ["User"], // Quando atualizar, o getMe será chamado de novo automaticamente
-    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useUpdateMeMutation, useGetMeQuery } = AuthService;
+export const { useLoginMutation, useRegisterMutation } = AuthService;

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { LuImageUp } from "react-icons/lu";
+
 import { usePostMutation } from "../../services/Post.Service";
-import { useGetMeQuery } from "../../services/Auth.Service";
+import { useGetMeQuery } from "../../services/Users.Service";
+
 import { useFileUpload } from "./fuctionsCreatePost";
+
 import { colors } from "../../styles/theme";
-import { Container } from "../../styles/GlobalStyles";
 import { ProfileIcon } from "../profileIcon";
+import { Button, Cabecalho, Container } from "../../styles/GlobalStyles";
 import * as Style from "./CreatePostStyled";
 
 export const CreatePost = () => {
@@ -41,7 +44,7 @@ export const CreatePost = () => {
 
   return (
     <>
-      <Style.Cabecalho>Following</Style.Cabecalho>
+      <Cabecalho>Following</Cabecalho>
 
       <Container>
         <Style.Card>
@@ -67,7 +70,7 @@ export const CreatePost = () => {
             <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
               onChange={onChangeFile} />
           </span>
-          <Style.Button onClick={publishPost} disabled={isDisabled}>Post</Style.Button>
+          <Button onClick={publishPost} disabled={isDisabled}>Post</Button>
         </Style.ListIcons>
       </Container>
     </>
