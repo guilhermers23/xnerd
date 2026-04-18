@@ -82,4 +82,12 @@ class FollowUserView(APIView):
         
         request.user.following.add(user_to_follow)
         return Response({"detail": "Seguindo com sucesso"}, status=status.HTTP_201_CREATED)
+
+class UserListView(generics.ListAPIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        # Retorna todos os usuários, exceto o que está fazendo a requisição
+        return User.objects.exclude(id=self.request.user.id).order_by('-date_joined')
     
