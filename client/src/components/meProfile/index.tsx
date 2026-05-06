@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import type { IUser } from "../../types/IUser";
 import { useImageUpload } from "./functions";
-import * as Style from "./MeProfileStyled";
 import { useUpdateMeMutation } from "../../services/Users.Service";
+import * as Style from "./MeProfileStyled";
 
 export const MeProfile = ({ cover, name, username, profile_image, following }: Omit<IUser, "email" | "password" | "birth_date">) => {
   const [updateMe] = useUpdateMeMutation();

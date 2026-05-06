@@ -18,7 +18,7 @@ export const Register = () => {
   const { handleSubmit, register, reset } = useForm<IData>({
     defaultValues: {
       cover: null,
-      following: "0",
+      following: [],
       profile_image: null,
     }
   }

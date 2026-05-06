@@ -7,5 +7,6 @@ export interface IUser {
   cover: string | null;
   profile_image: string | null;
   birth_date: string;
-  following: string;
+  following: number[];
+  is_following?: boolean;
 };

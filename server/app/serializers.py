@@ -65,3 +65,22 @@ class UserProfileSerializer(serializers.ModelSerializer):
         # ou descompactado do dicionário validated_data
         user = User.objects.create_user(**validated_data)
         return user
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    is_following = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = [
+            'id', 'name', 'username', 'email', 
+            'profile_image', 'cover', 'is_following'
+        ]
+
+    def get_is_following(self, obj):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            # Verifica se o usuário logado está na lista de seguidores do usuário que está sendo listado
+            return obj.followers.filter(pk=request.user.pk).exists()
+        return False
+    

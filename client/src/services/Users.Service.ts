@@ -22,10 +22,11 @@ export const UsersService = APISevice.injectEndpoints({
       providesTags: ["User"]
     }),
 
-    followUser: builder.mutation({
-      query: id => ({
-        url: `/user/${id}/follow`,
-        id
+    followUser: builder.mutation<void, number>({
+      query: (userID) => ({
+        url: `users/${userID}/follow/`,
+        method: "POST",
+        userID
       }),
       invalidatesTags: ['User']
     }),

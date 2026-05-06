@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from .models import Post
 from .serializers import PostSerializer, UserProfileSerializer, AuthorSerializer
 
@@ -72,16 +73,19 @@ class FollowUserView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
-        user_to_follow = User.objects.get(pk=pk)
+        # get_object_or_404 evita que o servidor caia se o ID for inválido
+        user_to_follow = get_object_or_404(User, pk=pk)
+        
         if user_to_follow == request.user:
             return Response({"error": "Você não pode seguir a si mesmo"}, status=status.HTTP_400_BAD_REQUEST)
         
-        if user_to_follow in request.user.following.all():
+        # Otimização: .exists() é mais rápido que carregar todos com .all()
+        if request.user.following.filter(pk=pk).exists():
             request.user.following.remove(user_to_follow)
-            return Response({"detail": "Deixou de seguir"}, status=status.HTTP_200_OK)
+            return Response({"detail": "Deixou de seguir", "is_following": False}, status=status.HTTP_200_OK)
         
         request.user.following.add(user_to_follow)
-        return Response({"detail": "Seguindo com sucesso"}, status=status.HTTP_201_CREATED)
+        return Response({"detail": "Seguindo com sucesso", "is_following": True}, status=status.HTTP_201_CREATED)
 
 class UserListView(generics.ListAPIView):
     serializer_class = UserProfileSerializer
@@ -90,4 +94,9 @@ class UserListView(generics.ListAPIView):
     def get_queryset(self):
         # Retorna todos os usuários, exceto o que está fazendo a requisição
         return User.objects.exclude(id=self.request.user.id).order_by('-date_joined')
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
     
