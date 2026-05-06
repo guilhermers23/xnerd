@@ -5,7 +5,8 @@ import { useImageUpload } from "./functions";
 import { useUpdateMeMutation } from "../../services/Users.Service";
 import * as Style from "./MeProfileStyled";
 
-export const MeProfile = ({ cover, name, username, profile_image, following }: Omit<IUser, "email" | "password" | "birth_date">) => {
+export const MeProfile = ({ cover, name, username, profile_image, followers_count, following_count }:
+  Omit<IUser, "email" | "password" | "birth_date" | "following">) => {
   const [updateMe] = useUpdateMeMutation();
   const { images, onchangeFile, clear, isDisabled } = useImageUpload();
   const avatarSrc = images.avatar.preview || profile_image || "/avatar_default.jpg";
@@ -71,7 +72,8 @@ export const MeProfile = ({ cover, name, username, profile_image, following }: O
       <Style.ProfileInfo>
         <h2>{name}</h2>
         <h3>{username}</h3>
-        <p><b>{following}</b> Seguidores</p>
+        <p><b>{followers_count}</b> Seguidores</p>
+        <p><b>{following_count}</b> Seguindo</p>
       </Style.ProfileInfo>
     </Style.ProfileContainer>
   )
