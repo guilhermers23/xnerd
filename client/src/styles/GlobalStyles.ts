@@ -43,6 +43,7 @@ export const Container = styled.div`
   width: 100%;
   align-items: center;
   border: solid 1px ${colors.gray400};
+  border-top: none;
 `
 
 export const Cabecalho = styled.div`

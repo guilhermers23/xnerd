@@ -19,11 +19,14 @@ class NewsFeedView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        # Filtra posts de quem o usuário segue OU posts do próprio usuário
+        # 1. Filtramos quem deve aparecer (Seguidos + Próprio usuário)
+        # 2. Filtramos para garantir que NENHUM desses seja um comentário (parent__isnull=True)
         return Post.objects.filter(
-            Q(user__in=user.following.all()) | Q(user=user)
+            (Q(user__in=user.following.all()) | Q(user=user)),
+            parent__isnull=True 
         ).distinct().order_by('-creation_at')
-
+        
+        
 # --- POSTS GLOBAIS E CRIAÇÃO ---
 class PostListCreateView(generics.ListCreateAPIView):
     queryset = Post.objects.all()

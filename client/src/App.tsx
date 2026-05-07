@@ -7,6 +7,7 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Profile } from "./pages/profile";
 import { Follow } from "./pages/follow";
+import { PostDetail } from "./pages/post";
 
 export const App = () => {
   return (
@@ -19,6 +20,7 @@ export const App = () => {
             <Route index element={<Home />} />
             <Route path="/me" element={<Profile />} />
             <Route path="/connect_people" element={<Follow />} />
+            <Route path="/post/detail/:postID" element={<PostDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>

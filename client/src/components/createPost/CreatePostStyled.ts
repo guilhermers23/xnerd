@@ -26,7 +26,7 @@ export const ListIcons = styled.section`
 
 export const Input = styled.textarea`
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   height: 5.6rem;
   margin: 0 1rem;
   padding: 1.6rem;

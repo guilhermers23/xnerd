@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { LuImageUp } from "react-icons/lu";
 
-import { usePostMutation } from "../../services/Post.Service";
+import { useAddPostMutation } from "../../services/Post.Service";
 import { useGetMeQuery } from "../../services/Users.Service";
 
 import { useFileUpload } from "./fuctionsCreatePost";
 
 import { colors } from "../../styles/theme";
 import { ProfileIcon } from "../profileIcon";
-import { Button, Cabecalho, Container } from "../../styles/GlobalStyles";
+import { Button, Container } from "../../styles/GlobalStyles";
 import * as Style from "./CreatePostStyled";
 
-export const CreatePost = () => {
+type Props = { placeholder: string, titleButton: string };
+
+export const CreatePost = ({ placeholder, titleButton }: Props) => {
   const { data: user } = useGetMeQuery();
-  const [makePost] = usePostMutation();
+  const [makePost] = useAddPostMutation();
 
   const [content, setContent] = useState('');
   const { file, preview, onChangeFile, clearPost } = useFileUpload();
@@ -43,36 +45,32 @@ export const CreatePost = () => {
   };
 
   return (
-    <>
-      <Cabecalho>Following</Cabecalho>
+    <Container>
+      <Style.Card>
+        <ProfileIcon urlImage={user?.profile_image} />
+        <Style.Input name="content" id="content" placeholder={placeholder}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+      </Style.Card>
 
-      <Container>
-        <Style.Card>
-          <ProfileIcon urlImage={user?.profile_image} />
-          <Style.Input name="content" id="content" placeholder="What's happening?"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-        </Style.Card>
+      {preview && (
+        <Style.Preview>
+          <Style.Close src="/close.png" alt="Close" onClick={clearPost} />
+          <Style.PreviewFile src={preview} alt="Preview do arquivo" />
+        </Style.Preview>
+      )}
 
-        {preview && (
-          <Style.Preview>
-            <Style.Close src="/close.png" alt="Close" onClick={clearPost} />
-            <Style.PreviewFile src={preview} alt="Preview do arquivo" />
-          </Style.Preview>
-        )}
-
-        <Style.ListIcons>
-          <span>
-            <label htmlFor="file-upload-image">
-              <LuImageUp size={25} color={colors.info} cursor="pointer" title="Selecionar uma imagem" />
-            </label>
-            <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
-              onChange={onChangeFile} />
-          </span>
-          <Button onClick={publishPost} disabled={isDisabled}>Post</Button>
-        </Style.ListIcons>
-      </Container>
-    </>
+      <Style.ListIcons>
+        <span>
+          <label htmlFor="file-upload-image">
+            <LuImageUp size={25} color={colors.info} cursor="pointer" title="Selecionar uma imagem" />
+          </label>
+          <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
+            onChange={onChangeFile} />
+        </span>
+        <Button onClick={publishPost} disabled={isDisabled}>{titleButton}</Button>
+      </Style.ListIcons>
+    </Container>
   )
 };
