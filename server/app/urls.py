@@ -1,8 +1,8 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import (
+from app.views import (
     RegisterView, MeView, PostListCreateView, 
-    PostDetailView, LikePostView, FollowUserView, NewsFeedView, UserListView
+    PostDetailView, LikePostView, FollowUserView, NewsFeedView, UserListView, CommentListView
 )
 
 urlpatterns = [
@@ -23,4 +23,6 @@ urlpatterns = [
     path('posts/', PostListCreateView.as_view(), name='posts_list'),
     path('posts/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('posts/<int:pk>/like/', LikePostView.as_view(), name='post_like'),
+    # Rota para criar um comentário ou listar comentários de um post
+    path('posts/<int:pk>/comments/', CommentListView.as_view(), name='post-comments'),
 ]
