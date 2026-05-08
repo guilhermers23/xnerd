@@ -72,8 +72,10 @@ export const MeProfile = ({ cover, name, username, profile_image, followers_coun
       <Style.ProfileInfo>
         <h2>{name}</h2>
         <h3>{username}</h3>
-        <p><b>{followers_count}</b> Seguidores</p>
-        <p><b>{following_count}</b> Seguindo</p>
+        <div>
+          <p><b>{followers_count}</b> Seguidores</p>
+          <p><b>{following_count}</b> Seguindo</p>
+        </div>
       </Style.ProfileInfo>
     </Style.ProfileContainer>
   )

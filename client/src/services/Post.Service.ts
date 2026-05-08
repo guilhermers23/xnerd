@@ -11,9 +11,14 @@ export const PostService = APISevice.injectEndpoints({
       }),
       invalidatesTags: ["Posts"]
     }),
-    // Buscar posts
+    // Buscar posts de usuários seguidos
     getPosts: builder.query<IPost[], void>({
       query: () => "feed/",
+      providesTags: ["Posts"]
+    }),
+    // Buscar somente seus posts
+    getMePosts: builder.query<IPost[], string | undefined>({
+      query: (username) => `posts/user/${username}`,
       providesTags: ["Posts"]
     }),
     // Buscar um post específico
@@ -38,4 +43,10 @@ export const PostService = APISevice.injectEndpoints({
   })
 });
 
-export const { useAddPostMutation, useGetPostsQuery, useAddCommentsMutation, useGetCommentsQuery, useGetPostQuery } = PostService;
+export const {
+  useAddPostMutation,
+  useGetPostsQuery,
+  useAddCommentsMutation,
+  useGetCommentsQuery,
+  useGetPostQuery,
+  useGetMePostsQuery } = PostService;

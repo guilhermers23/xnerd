@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
+import type { RootReducer } from "../../store";
 import { BsTwitterX } from "react-icons/bs";
 import { ProfileIcon } from "../profileIcon";
 import { GoHome } from "react-icons/go";
@@ -6,11 +8,10 @@ import { TbSearch } from "react-icons/tb";
 import { RiNotification4Line } from "react-icons/ri";
 import { LuUserPlus } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
-import { useGetMeQuery } from "../../services/Users.Service";
 import * as Style from "./Sidebar";
 
 export const SideBar = () => {
-  const { data: getUser } = useGetMeQuery();
+  const { user } = useSelector((state: RootReducer) => state.user);
 
   return (
     <Style.SideMenu>
@@ -31,17 +32,17 @@ export const SideBar = () => {
           <Link to="/connect_people">
             <li><LuUserPlus size={35} />Seguir</li>
           </Link>
-          <Link to="/me">
+          <Link to={`/${user?.username}`}>
             <li><FaRegUser size={35} />Perfil</li>
           </Link>
         </Style.ListMenu>
       </nav>
 
       <Style.Account>
-        <ProfileIcon urlImage={getUser?.profile_image} />
+        <ProfileIcon urlImage={user?.profile_image} />
         <span>
-          <b>{getUser?.name}</b>
-          <p>{getUser?.username}</p>
+          <b>{user?.name}</b>
+          <p>{user?.username}</p>
         </span>
       </Style.Account>
 

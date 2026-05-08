@@ -1,24 +1,11 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
-
-import { useGetMeQuery } from "../../services/Users.Service";
 import { useGetPostsQuery } from "../../services/Post.Service";
-import { logout, setUser } from "../../store/reducers/user";
 
 import { CreatePost } from "../../components/createPost";
 import { Post } from "../../components/posts";
 import { Cabecalho } from "../../styles/GlobalStyles";
 
 export const Home = () => {
-  const dispatch = useDispatch();
   const { data: posts, isLoading: loadingPosts, error: postError } = useGetPostsQuery();
-  const { data: getUser } = useGetMeQuery();
-
-  useEffect(() => {
-    if (Cookies.get("token") && getUser) dispatch(setUser(getUser));
-    if (!Cookies.get("token") && getUser) dispatch(logout());
-  }, [getUser, dispatch])
 
   return (
     <section>

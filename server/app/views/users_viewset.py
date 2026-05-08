@@ -7,7 +7,8 @@ from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from app.serializers import UserProfileSerializer, UserRegisterSerializer
+from app.models import Post
+from app.serializers import UserProfileSerializer, UserRegisterSerializer, PostSerializer
 
 User = get_user_model()
 
@@ -25,7 +26,8 @@ class MeView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user # Retorna o usuário logado para edição
-
+        
+        
 # --- SERGUIR USUÁRIOS ---
 class FollowUserView(APIView):
     permission_classes = [permissions.IsAuthenticated]

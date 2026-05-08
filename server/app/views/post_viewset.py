@@ -26,10 +26,24 @@ class NewsFeedView(generics.ListAPIView):
             parent__isnull=True 
         ).distinct().order_by('-creation_at')
         
+
+# --- BUSCAR POSTAGENS POR USERNAME
+class UserPostsView(generics.ListAPIView):
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        username = self.kwargs['username']
+        # Filtra posts do usuário pelo username e garante que não sejam comentários
+        return Post.objects.filter(
+            user__username=username, 
+            parent__isnull=True
+        ).order_by('-creation_at')
+        
         
 # --- POSTS GLOBAIS E CRIAÇÃO ---
 class PostListCreateView(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-creation_at')
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

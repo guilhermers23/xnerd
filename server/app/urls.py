@@ -1,8 +1,16 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from app.views import (
-    RegisterView, MeView, PostListCreateView, 
-    PostDetailView, LikePostView, FollowUserView, NewsFeedView, UserListView, CommentListView
+    RegisterView, 
+    MeView, 
+    PostListCreateView,
+    UserPostsView,
+    PostDetailView, 
+    LikePostView, 
+    FollowUserView, 
+    NewsFeedView, 
+    UserListView, 
+    CommentListView
 )
 
 urlpatterns = [
@@ -13,9 +21,10 @@ urlpatterns = [
 
     # Perfil (Requisito: Alterar foto, nome, etc.)
     path('me/', MeView.as_view(), name='my_profile'),
-
     # Social e Feed (Requisito: Seguir e ver apenas seguidos)
     path('feed/', NewsFeedView.as_view(), name='news_feed'),
+    path('posts/user/<str:username>/', UserPostsView.as_view(), name='user-posts'),
+    
     path('users/', UserListView.as_view(), name='user-list'),
     path('users/<int:pk>/follow/', FollowUserView.as_view(), name='user_follow'),
 

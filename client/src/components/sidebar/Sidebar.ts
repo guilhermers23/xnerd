@@ -17,6 +17,7 @@ export const SideMenu = styled.aside`
   gap: 1rem;
   align-self: flex-start;
   text-align: left;
+  border-right: solid 1px ${colors.gray500} ;
 `
 
 export const ListMenu = styled.ul`

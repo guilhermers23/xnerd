@@ -54,6 +54,11 @@ export const ProfileInfo = styled.div`
     color: ${colors.gray200};
     font-weight: 400;
   }
+
+  div{
+    display: flex;
+    gap: 1rem;
+  }
 `
 
 export const EditCover = styled.span`

@@ -18,7 +18,7 @@ export const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<LayoutDefault />}>
             <Route index element={<Home />} />
-            <Route path="/me" element={<Profile />} />
+            <Route path="/:username" element={<Profile />} />
             <Route path="/connect_people" element={<Follow />} />
             <Route path="/post/detail/:postID" element={<PostDetail />} />
           </Route>
