@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LuImageUp } from "react-icons/lu";
 
-import { useAddPostMutation } from "../../services/Post.Service";
+import { useAddPostMutation, useAddCommentsMutation } from "../../services/Post.Service";
 import { useGetMeQuery } from "../../services/Users.Service";
 
 import { useFileUpload } from "./fuctionsCreatePost";
@@ -11,11 +11,12 @@ import { ProfileIcon } from "../profileIcon";
 import { Button, Container } from "../../styles/GlobalStyles";
 import * as Style from "./CreatePostStyled";
 
-type Props = { placeholder: string, titleButton: string };
+type Props = { placeholder: string, titleButton: string, postID?: number | string };
 
-export const CreatePost = ({ placeholder, titleButton }: Props) => {
+export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
   const { data: user } = useGetMeQuery();
   const [makePost] = useAddPostMutation();
+  const [addComment] = useAddCommentsMutation();
 
   const [content, setContent] = useState('');
   const { file, preview, onChangeFile, clearPost } = useFileUpload();
@@ -23,26 +24,34 @@ export const CreatePost = ({ placeholder, titleButton }: Props) => {
 
   const publishPost = async () => {
     if (content.trim().length < 3) {
-      alert('Campo deve possui no mínimo 3 caracteres.')
+      alert('Campo deve possuir no mínimo 3 caracteres.');
       return;
-    };
+    }
 
     const formData = new FormData();
     formData.append('content', content);
-    if (file) { formData.append('midia', file) };
+    if (file) {
+      formData.append('midia', file);
+    }
 
     try {
-      const res = await makePost(formData).unwrap();
-      console.log(res);
-      alert("Postagem realizada com sucesso!");
+      if (postID) {
+        // Se postID existe, é um comentário
+        await addComment({ postID, formData }).unwrap();
+      } else {
+        // Caso contrário, é um post normal
+        await makePost(formData).unwrap();
+      }
+      alert("Sucesso!");
       setContent('');
       clearPost();
 
     } catch (error) {
-      console.error(error)
-      alert("Ocorreu erro ao realizar Postagem!");
+      console.error(error);
+      alert("Ocorreu um erro no processamento!");
     }
   };
+
 
   return (
     <Container>

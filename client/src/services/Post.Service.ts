@@ -27,13 +27,13 @@ export const PostService = APISevice.injectEndpoints({
       providesTags: ["Posts"]
     }),
     // Criar um comentário (enviando o parent id na URL ou no body)
-    addComments: builder.mutation<IPost, { postID: number, content: string }>({
-      query: ({ postID, content }) => ({
+    addComments: builder.mutation<IPost, { postID: string | number; formData: FormData }>({
+      query: ({ postID, formData }) => ({
         url: `posts/${postID}/comments/`,
         method: "POST",
-        body: { content }
+        body: formData
       }),
-      invalidatesTags: ["Posts"]
+      invalidatesTags: ["Posts"],
     }),
   })
 });

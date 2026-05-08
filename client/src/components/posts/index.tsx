@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { FaRegComment } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { IoIosHeartEmpty } from "react-icons/io";
@@ -6,16 +7,18 @@ import { ProfileIcon } from "../profileIcon";
 import type { IPost } from "../../types/IPost";
 import * as Style from "./PostCardStyled";
 
-export const Post = ({ user, content, midia, comments_count, likes_count }: Omit<IPost, "id">) => {
+export const Post = ({ user, content, midia, comments_count, likes_count, id }: IPost) => {
   return (
     <Style.ContainerCard>
       <ProfileIcon urlImage={user.profile_image} />
       <Style.HeaderPost>
         <h4>{user.name} <i>{user.username}</i></h4>
-        <p>{content}</p>
-        <Style.BodyPost>
-          {midia && <img src={midia} alt="Mídia da Postagem" />}
-        </Style.BodyPost>
+        <Link to={`/post/detail/${id}/`} key={id}>
+          <p>{content}</p>
+          <Style.BodyPost>
+            {midia && <img src={midia} alt="Mídia da Postagem" />}
+          </Style.BodyPost>
+        </Link>
         <Style.IconsList>
           <span> <FaRegComment size={20} cursor="pointer" title="Comentários" /> {comments_count} </span>
           <span> <BiRepost size={25} cursor="pointer" title="Repostagens" /> 20 </span>
@@ -23,6 +26,7 @@ export const Post = ({ user, content, midia, comments_count, likes_count }: Omit
           <span> <BsGraphUp size={20} cursor="pointer" title="Views" /> 20mil </span>
         </Style.IconsList>
       </Style.HeaderPost>
+
     </Style.ContainerCard>
   )
 };

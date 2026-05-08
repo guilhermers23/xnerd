@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Post } from "../../components/posts";
 import { useGetPostQuery, useGetCommentsQuery } from "../../services/Post.Service";
 import { Cabecalho } from "../../styles/GlobalStyles";
@@ -13,7 +13,7 @@ export const PostDetail = () => {
     <section>
       <Cabecalho>Post</Cabecalho>
       {!data ? "Ocorreu erro ao carregar Postagem." :
-        <Post key={data.id}
+        <Post id={data.id} key={data.id}
           user={data.user}
           content={data.content}
           comments_count={data.comments_count}
@@ -23,20 +23,18 @@ export const PostDetail = () => {
         />
       }
 
-      <CreatePost placeholder="Poste sua resposta" titleButton="Responder" />
+      <CreatePost placeholder="Poste sua resposta" titleButton="Responder" postID={postID} />
 
       {!getComments ? "Ocorreu erro ao carregar os comentários." : (
         getComments.map((comments) => (
-          <Link to={`/post/detail/${comments.id}/`}>
-            <Post key={comments.id}
-              user={comments.user}
-              content={comments.content}
-              comments_count={comments.comments_count}
-              midia={comments.midia}
-              creation_at={comments.creation_at}
-              likes_count={comments.likes_count}
-            />
-          </Link>
+          <Post id={comments.id} key={comments.id}
+            user={comments.user}
+            content={comments.content}
+            comments_count={comments.comments_count}
+            midia={comments.midia}
+            creation_at={comments.creation_at}
+            likes_count={comments.likes_count}
+          />
         ))
       )}
 
