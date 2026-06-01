@@ -5,6 +5,7 @@ from app.views import (
     MeView, 
     PostListCreateView,
     UserPostsView,
+    UserProfileView,
     PostDetailView, 
     LikePostView, 
     FollowUserView, 
@@ -27,6 +28,7 @@ urlpatterns = [
     
     path('users/', UserListView.as_view(), name='user-list'),
     path('users/<int:pk>/follow/', FollowUserView.as_view(), name='user_follow'),
+    path('users/profile/<str:username>/', UserProfileView.as_view(), name='user-profile-detail'),
 
     # Posts e Interações (Requisito: Curtidas e Comentários)
     path('posts/', PostListCreateView.as_view(), name='posts_list'),

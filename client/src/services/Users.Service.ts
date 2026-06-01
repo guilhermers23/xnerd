@@ -31,7 +31,12 @@ export const UsersService = APISevice.injectEndpoints({
       invalidatesTags: ['User']
     }),
 
+    getUserByUsername: builder.query<IUser, string>({
+      query: (username) => `users/profile/${username}/`,
+      providesTags: ["User"]
+    }),
+
   })
 });
 
-export const { useGetMeQuery, useUpdateMeMutation, useGetUsersQuery, useFollowUserMutation } = UsersService;
+export const { useGetMeQuery, useUpdateMeMutation, useGetUsersQuery, useFollowUserMutation, useGetUserByUsernameQuery } = UsersService;

@@ -60,4 +60,10 @@ class UserListView(generics.ListAPIView):
         context = super().get_serializer_context()
         context.update({"request": self.request})
         return context
+
+class UserProfileView(generics.RetrieveAPIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    lookup_field = 'username' # Diz ao Django para buscar pela coluna 'username' em vez de 'pk'
     

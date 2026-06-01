@@ -1,15 +1,15 @@
-import { useSelector } from "react-redux";
-import type { RootReducer } from "../../store";
 import { MeProfile } from "../../components/meProfile";
 import { Post } from "../../components/posts"
 import { useGetMePostsQuery } from "../../services/Post.Service";
 import { Cabecalho } from "../../styles/GlobalStyles";
 import { useParams } from "react-router";
+import { useGetUserByUsernameQuery } from "../../services/Users.Service";
 
 export const Profile = () => {
-  const { username } = useParams();
-  const { user } = useSelector((state: RootReducer) => state.user);
-  const { data: posts, isError: postsError } = useGetMePostsQuery(username);
+  const { username } = useParams<{ username: string }>();
+  const queryUsername = username ?? "";
+  const { data: user } = useGetUserByUsernameQuery(queryUsername);
+  const { data: posts, isError: postsError } = useGetMePostsQuery(queryUsername);
 
   return (
     <section>

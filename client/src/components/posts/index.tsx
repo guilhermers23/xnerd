@@ -10,7 +10,9 @@ import * as Style from "./PostCardStyled";
 export const Post = ({ user, content, midia, comments_count, likes_count, id }: IPost) => {
   return (
     <Style.ContainerCard>
-      <ProfileIcon urlImage={user.profile_image} />
+      <Link to={`/${user.username}`}>
+        <ProfileIcon urlImage={user.profile_image} />
+      </Link>
       <Style.HeaderPost>
         <h4>{user.name} <i>{user.username}</i></h4>
         <Link to={`/post/detail/${id}/`} key={id}>

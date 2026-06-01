@@ -1,2 +1,2 @@
 from .post_viewset import NewsFeedView, PostDetailView, PostListCreateView, CommentListView, LikePostView, UserPostsView
-from .users_viewset import UserRegisterSerializer, FollowUserView, UserListView, RegisterView, MeView
+from .users_viewset import UserRegisterSerializer, FollowUserView, UserListView, RegisterView, MeView, UserProfileView
