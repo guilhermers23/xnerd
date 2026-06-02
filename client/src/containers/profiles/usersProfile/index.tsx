@@ -1,4 +1,3 @@
-import type { IUser } from "../../../types/IUser";
 import * as Style from "../MeProfileStyled";
 
 export const UserProfile = ({ cover, name, username, profile_image, followers_count, following_count }:

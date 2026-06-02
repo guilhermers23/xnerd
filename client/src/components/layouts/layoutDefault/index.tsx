@@ -7,7 +7,7 @@ import { useGetMeQuery } from "../../../services/Users.Service";
 import { logout, setUser } from "../../../store/reducers/user";
 
 import { colors } from "../../../styles/theme";
-import { SideBar } from "../../sidebar";
+import { SideBar } from "../../../containers/sidebar";
 import * as Style from "./LayoutStyled";
 
 export const LayoutDefault = () => {

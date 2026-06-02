@@ -1,4 +1,3 @@
-import type { IUser } from "../types/IUser";
 import { APISevice } from "./API.service";
 
 export const UsersService = APISevice.injectEndpoints({

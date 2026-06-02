@@ -1,15 +1,18 @@
 import { useState } from "react";
+import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { FaRegEdit } from "react-icons/fa";
-import { MeProfile } from "../../containers/profiles/meProfile";
-import { Post } from "../../components/posts"
-import { useGetMePostsQuery } from "../../services/Post.Service";
-import { Cabecalho } from "../../styles/GlobalStyles";
-import { useParams } from "react-router";
-import { useGetUserByUsernameQuery } from "../../services/Users.Service";
-import { Modal } from "../../components/modal";
-import { UserProfile } from "../../containers/profiles/usersProfile";
+
 import type { RootReducer } from "../../store";
+import { useGetUserByUsernameQuery } from "../../services/Users.Service";
+import { useGetMePostsQuery } from "../../services/Post.Service";
+
+import { MeProfile } from "../../containers/profiles/meProfile";
+import { UserProfile } from "../../containers/profiles/usersProfile";
+import { Modal } from "../../containers/modal";
+import { Post } from "../../components/posts"
+
+import { Cabecalho } from "../../styles/GlobalStyles";
 import * as Styled from "./ProfileStyled";
 
 export const Profile = () => {

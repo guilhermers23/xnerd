@@ -1,29 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import { LayoutDefault } from "./components/layouts/layoutDefault";
-import { Home } from "./pages/home";
-import { Login } from "./pages/login";
-import { Register } from "./pages/register";
-import { Profile } from "./pages/profile";
-import { Follow } from "./pages/follow";
-import { PostDetail } from "./pages/post";
+import AppRoutes from "./routes";
 
 export const App = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<LayoutDefault />}>
-            <Route index element={<Home />} />
-            <Route path="/:username" element={<Profile />} />
-            <Route path="/connect_people" element={<Follow />} />
-            <Route path="/post/detail/:postID" element={<PostDetail />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AppRoutes />
     </Provider>
   )
 };

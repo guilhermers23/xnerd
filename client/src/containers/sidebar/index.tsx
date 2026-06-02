@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useSelector } from "react-redux";
 import type { RootReducer } from "../../store";
 import { BsTwitterX } from "react-icons/bs";
-import { ProfileIcon } from "../profileIcon";
+import { ProfileIcon } from "../../components/profileIcon";
 import { GoHome } from "react-icons/go";
 import { TbSearch } from "react-icons/tb";
 import { RiNotification4Line } from "react-icons/ri";

@@ -4,7 +4,6 @@ import { BiRepost } from "react-icons/bi";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsGraphUp } from "react-icons/bs";
 import { ProfileIcon } from "../profileIcon";
-import type { IPost } from "../../types/IPost";
 import * as Style from "./PostCardStyled";
 
 export const Post = ({ user, content, midia, comments_count, likes_count, id }: IPost) => {

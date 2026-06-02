@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
-import type { IUser } from "../../../types/IUser";
-import { useImageUpload } from "./functions";
 import { useUpdateMeMutation } from "../../../services/Users.Service";
-import * as Style from "../MeProfileStyled";
+import { useImageUpload } from "./functions";
 import { FloatingInput } from "../../../components/input";
+import * as Style from "../MeProfileStyled";
 
 export const MeProfile = ({ cover, name, profile_image }:
   Omit<IUser, "email" | "birth_date" | "following" | "password">) => {

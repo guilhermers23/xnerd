@@ -1,8 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router";
 
-import type { IUser } from "../../types/IUser";
-
 import { useRegisterMutation } from "../../services/Auth.Service"
 import { genereteUsername } from "../../utils/ultilsFuction";
 

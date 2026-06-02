@@ -8,15 +8,13 @@ export const Follow = () => {
   const [followUser, { isLoading: followLoading }] = useFollowUserMutation();
 
   const follow = async (id: number) => {
-    const res = await followUser(id);
-    console.log(res)
-
-    if (res.error) {
+    try {
+      const res = await followUser(id);
+      alert(res.detail);
+    } catch (error) {
       alert("Desculpe! Ocorreu algum erro.");
-      console.error(res.error);
-      return;
-    };
-    alert(res.data.detail);
+      console.error(error);
+    }
   };
 
   return (

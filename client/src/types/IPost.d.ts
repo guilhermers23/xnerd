@@ -1,6 +1,4 @@
-import type { IUser } from "./IUser";
-
-export interface IPost {
+declare interface IPost {
   id: number;
   user: IUser;
   midia: string;

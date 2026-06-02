@@ -1,5 +1,4 @@
 import { APISevice } from "./API.service";
-import type { IUser } from "../types/IUser";
 
 type AuthUser = { access: string; refresh: string, user: IUser; };
 

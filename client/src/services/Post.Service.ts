@@ -1,4 +1,3 @@
-import type { IPost } from "../types/IPost";
 import { APISevice } from "./API.service";
 
 export const PostService = APISevice.injectEndpoints({
