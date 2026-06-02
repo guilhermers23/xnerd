@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
-import type { IUser } from "../../types/IUser";
+import type { IUser } from "../../../types/IUser";
 import { useImageUpload } from "./functions";
-import { useUpdateMeMutation } from "../../services/Users.Service";
-import * as Style from "./MeProfileStyled";
+import { useUpdateMeMutation } from "../../../services/Users.Service";
+import * as Style from "../MeProfileStyled";
+import { FloatingInput } from "../../../components/input";
 
-export const MeProfile = ({ cover, name, username, profile_image, followers_count, following_count }:
-  Omit<IUser, "email" | "password" | "birth_date" | "following">) => {
+export const MeProfile = ({ cover, name, profile_image }:
+  Omit<IUser, "email" | "birth_date" | "following" | "password">) => {
   const [updateMe] = useUpdateMeMutation();
-  const { images, onchangeFile, clear, isDisabled } = useImageUpload();
+  const { images, onchangeFile, clear } = useImageUpload();
+  const [tempName, setTempName] = useState<string>(name);
   const avatarSrc = images.avatar.preview || profile_image || "/avatar_default.jpg";
   const coverSrc = images.cover.preview || cover || "/banner.jpg";
 
@@ -16,6 +18,7 @@ export const MeProfile = ({ cover, name, username, profile_image, followers_coun
     const formData = new FormData();
     if (images.cover.file) { formData.append("cover", images.cover.file); };
     if (images.avatar.file) { formData.append("profile_image", images.avatar.file); };
+    formData.append("name", tempName);
 
     try {
       const res = await updateMe(formData).unwrap();
@@ -62,21 +65,18 @@ export const MeProfile = ({ cover, name, username, profile_image, followers_coun
         </Style.ProfileHeader>
       </Style.ProfileBackground>
 
-      <Style.Buttons>
-        <Style.ButtonEdit isDisabled={isDisabled} type="salvar"
-          onClick={updateProfile}>Salvar</Style.ButtonEdit>
-        <Style.ButtonEdit isDisabled={isDisabled} type="cancelar"
-          onClick={clear}>Cancelar</Style.ButtonEdit>
-      </Style.Buttons>
-
       <Style.ProfileInfo>
-        <h2>{name}</h2>
-        <h3>{username}</h3>
-        <div>
-          <p><b>{followers_count}</b> Seguidores</p>
-          <p><b>{following_count}</b> Seguindo</p>
-        </div>
+        <FloatingInput label="Nome" id="name" type="text" value={tempName}
+          onChange={(e) => setTempName(e.target.value)} />
+        <FloatingInput label="Alterar Senha" id="password" type="password" />
       </Style.ProfileInfo>
+
+
+        <Style.Buttons>
+          <Style.ButtonEdit isDisabled={false} type="salvar"
+            onClick={updateProfile}>Salvar</Style.ButtonEdit>
+        </Style.Buttons>
+
     </Style.ProfileContainer>
   )
 };

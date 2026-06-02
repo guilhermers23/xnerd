@@ -1,6 +1,6 @@
-import { colors } from './../../styles/theme';
+import { colors } from '../../styles/theme';
 import styled from "styled-components";
-import { ProfileIcon } from "../profileIcon/ProfileIconStyled";
+import { ProfileIcon } from "../../components/profileIcon/ProfileIconStyled";
 
 interface PropsCover { isCover: string };
 interface PropsButton { type: "salvar" | "cancelar", isDisabled: boolean };
