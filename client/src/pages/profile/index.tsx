@@ -49,6 +49,8 @@ export const Profile = () => {
           name={user.name}
           profile_image={user.profile_image}
           username={user.username}
+          is_following={user.is_following}
+          isLoggedIn={isLoggedIn}
         />
         : "Ocorreu um erro ao processar os dados!"}
 
@@ -62,6 +64,7 @@ export const Profile = () => {
           comments_count={post.comments_count}
           creation_at={post.creation_at}
           likes_count={post.likes_count}
+          is_liked={post.is_liked}
         />
       ))}
     </Styled.Section>

@@ -1,3 +1,21 @@
+import { useFollowUserMutation } from "../services/Users.Service";
+
+export const useFollow = () => {
+  const [followUser, { isLoading: followLoading }] = useFollowUserMutation();
+
+  const fuctionFollow = async (id: number) => {
+    try {
+      const res = await followUser(id).unwrap();
+      alert(res.detail);
+    } catch (error) {
+      alert("Desculpe! Ocorreu algum erro.");
+      console.error(error);
+    }
+  };
+
+  return { followLoading, fuctionFollow }
+};
+
 export const genereteUsername = (name: string) => {
   const nameUser = name.toLowerCase().split(" ");
   const randomNumber = Math.floor(Math.random() * 9000) + 1000;

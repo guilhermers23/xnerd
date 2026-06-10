@@ -42,8 +42,11 @@ export const Buttons = styled.div`
 `
 
 export const ProfileInfo = styled.div`
-  padding: .5rem;
+  padding: 1rem;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   h3{
     color: ${colors.gray300};

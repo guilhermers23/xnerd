@@ -1,21 +1,13 @@
-import { useFollowUserMutation, useGetUsersQuery } from "../../services/Users.Service";
+import { Link } from "react-router";
+import { useGetUsersQuery } from "../../services/Users.Service";
 import { ProfileIcon } from "../../components/profileIcon";
 import { Button, Cabecalho } from "../../styles/GlobalStyles";
+import { useFollow } from "../../utils/ultilsFuction";
 import * as Style from "./FollowStyle";
 
 export const Follow = () => {
+  const {followLoading, fuctionFollow} = useFollow();
   const { data, isLoading } = useGetUsersQuery();
-  const [followUser, { isLoading: followLoading }] = useFollowUserMutation();
-
-  const follow = async (id: number) => {
-    try {
-      const res = await followUser(id);
-      alert(res.detail);
-    } catch (error) {
-      alert("Desculpe! Ocorreu algum erro.");
-      console.error(error);
-    }
-  };
 
   return (
     <Style.SectionFollow>
@@ -24,14 +16,16 @@ export const Follow = () => {
       {data?.map(({ name, username, profile_image, id, is_following }) =>
         <>
           <Style.Follow>
-            <Style.HeaderFollow>
-              <ProfileIcon urlImage={profile_image} key={id} />
-              <span>
-                <b>{name}</b>
-                <p>{username}</p>
-              </span>
-            </Style.HeaderFollow>
-            <Button onClick={() => follow(id)}
+            <Link to={`/${username}`}>
+              <Style.HeaderFollow>
+                <ProfileIcon urlImage={profile_image} key={id} />
+                <span>
+                  <b>{name}</b>
+                  <p>{username}</p>
+                </span>
+              </Style.HeaderFollow>
+            </Link>
+            <Button onClick={() => fuctionFollow(id)}
               disabled={followLoading}>
               {is_following ? "Deixar de seguir" : "Seguir"}
             </Button>
