@@ -13,12 +13,12 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<LayoutDefault />}>
-          <Route index element={<Home />} />
-          <Route path="/:username" element={<Profile />} />
-          <Route path="/connect_people" element={<Follow />} />
-          <Route path="/post/detail/:postID" element={<PostDetail />} />
-        </Route>
+          <Route path="/" element={<LayoutDefault />}>
+            <Route index element={<Home />} />
+            <Route path="/:username" element={<Profile />} />
+            <Route path="/connect_people" element={<Follow />} />
+            <Route path="/post/detail/:postID" element={<PostDetail />} />
+          </Route>
       </Routes>
     </BrowserRouter>
   )

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet } from "react-router"
+import { Outlet, useNavigate } from "react-router"
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 
@@ -13,11 +13,15 @@ import * as Style from "./LayoutStyled";
 export const LayoutDefault = () => {
   const { data: getUser } = useGetMeQuery();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (Cookies.get("token") && getUser) dispatch(setUser(getUser));
-    if (!Cookies.get("token") && getUser) dispatch(logout());
-  }, [getUser, dispatch])
+    if (!Cookies.get("token") && !getUser) {
+      dispatch(logout())
+      navigate("/login")
+    }
+  }, [getUser, dispatch, navigate])
 
   return (
     <Style.Main>
