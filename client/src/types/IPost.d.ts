@@ -5,5 +5,6 @@ declare interface IPost {
   content: string;
   creation_at: Date;
   likes_count: number;
+  is_liked: boolean;
   comments_count: number;
 };

@@ -39,6 +39,15 @@ export const PostService = APISevice.injectEndpoints({
       }),
       invalidatesTags: ["Posts"],
     }),
+
+    like: builder.mutation({
+      query: (id: number) => ({
+        url: `posts/${id}/like/`,
+        method: "POST",
+        id
+      }),
+      invalidatesTags: ["Posts"]
+    }),
   })
 });
 
@@ -48,4 +57,5 @@ export const {
   useAddCommentsMutation,
   useGetCommentsQuery,
   useGetPostQuery,
-  useGetMePostsQuery } = PostService;
+  useGetMePostsQuery,
+  useLikeMutation } = PostService;

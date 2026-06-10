@@ -20,6 +20,7 @@ export const Home = () => {
           comments_count={post.comments_count}
           creation_at={post.creation_at}
           likes_count={post.likes_count}
+          is_liked={post.is_liked}
         />
       ))}
     </section>

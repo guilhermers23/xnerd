@@ -11,7 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
     # Aqui a mágica acontece: o campo 'user' deixa de ser um ID 
     # e vira o objeto do AuthorSerializer
     user = AuthorSerializer(read_only=True)
-    
+    is_liked = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
 
@@ -19,7 +19,7 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = [
             'id', 'user', 'content', 'midia', 
-            'creation_at', 'likes_count', 'parent', 'comments_count'
+            'creation_at', 'likes_count', 'parent', 'comments_count', 'is_liked'
         ]
 
     def get_likes_count(self, obj):
@@ -27,4 +27,12 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_comments_count(self, obj):
         return obj.comments.count()
+
+    def get_is_liked(self, obj):
+        # Pega o usuário logado a partir do contexto da requisição (Token JWT)
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            # Verifica se o usuário logado está na lista de likes deste post específico
+            return obj.likes.filter(pk=request.user.pk).exists()
+        return False    
     

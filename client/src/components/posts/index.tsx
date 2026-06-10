@@ -4,9 +4,13 @@ import { BiRepost } from "react-icons/bi";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsGraphUp } from "react-icons/bs";
 import { ProfileIcon } from "../profileIcon";
+import { MdOutlineFavorite } from "react-icons/md";
+import { useLikeMutation } from "../../services/Post.Service";
 import * as Style from "./PostCardStyled";
 
-export const Post = ({ user, content, midia, comments_count, likes_count, id }: IPost) => {
+export const Post = ({ user, content, midia, comments_count, likes_count, id, is_liked }: IPost) => {
+  const [like] = useLikeMutation();
+
   return (
     <Style.ContainerCard>
       <Link to={`/${user.username}`}>
@@ -21,9 +25,17 @@ export const Post = ({ user, content, midia, comments_count, likes_count, id }: 
           </Style.BodyPost>
         </Link>
         <Style.IconsList>
-          <span> <FaRegComment size={20} cursor="pointer" title="Comentários" /> {comments_count} </span>
+          <Link to={`/post/detail/${id}/`} key={id}>
+            <span> <FaRegComment size={20} cursor="pointer" title="Comentários" /> {comments_count} </span>
+          </Link>
           <span> <BiRepost size={25} cursor="pointer" title="Repostagens" /> 20 </span>
-          <span> <IoIosHeartEmpty size={20} cursor="pointer" title="Like" /> {likes_count} </span>
+
+          <span onClick={() => like(id)}>
+            {!is_liked ? (
+              <IoIosHeartEmpty size={20} cursor="pointer" title="DesLike" />
+            ) : (
+              <MdOutlineFavorite color="red" size={20} cursor="pointer" title="Like" />
+            )} {likes_count} </span>
           <span> <BsGraphUp size={20} cursor="pointer" title="Views" /> 20mil </span>
         </Style.IconsList>
       </Style.HeaderPost>
