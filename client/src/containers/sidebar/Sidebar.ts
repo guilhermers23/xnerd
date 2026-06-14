@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { colors } from "../../styles/theme";
 
+type Props = {isOpen: boolean};
+
 export const SideMenu = styled.aside`
   header{
   padding: 1rem;
@@ -41,8 +43,16 @@ export const ListMenu = styled.ul`
     }
   }
 `
+export const ButtonLogout = styled.section<Props>`
+  display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  position: absolute;
+  top: -4rem;
+  right: 1rem;
+`
 
 export const Account = styled.button`
+  width: 100%;
+  position: relative;
   font-size: 1.6rem;
   color: ${colors.textDefault};
   background-color: transparent;
@@ -68,6 +78,13 @@ export const Account = styled.button`
       font-size: 1.5rem;
       color: ${colors.gray400};
     }
+
+    @media (max-width: 768px) {
+      p{
+        font-size: 1.2rem;
+      }
+    }
   }
+
 `
 

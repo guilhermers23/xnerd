@@ -1,17 +1,34 @@
-import { Link } from "react-router";
-import { useSelector } from "react-redux";
-import type { RootReducer } from "../../store";
-import { BsTwitterX } from "react-icons/bs";
-import { ProfileIcon } from "../../components/profileIcon";
+import { Link, useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
+
 import { GoHome } from "react-icons/go";
 import { TbSearch } from "react-icons/tb";
-import { RiNotification4Line } from "react-icons/ri";
-import { LuUserPlus } from "react-icons/lu";
+import { BsTwitterX } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
+import { LuUserPlus } from "react-icons/lu";
+import { RiNotification4Line } from "react-icons/ri";
+
+import type { RootReducer } from "../../store";
+import { logout } from "../../store/reducers/user";
+import { ProfileIcon } from "../../components/profileIcon";
+import { Button } from "../../styles/GlobalStyles";
 import * as Style from "./Sidebar";
+import { useState } from "react";
 
 export const SideBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state: RootReducer) => state.user);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const out = () => {
+    dispatch(logout());
+    Cookies.remove("token");
+    navigate("/login");
+  };
 
   return (
     <Style.SideMenu>
@@ -38,12 +55,17 @@ export const SideBar = () => {
         </Style.ListMenu>
       </nav>
 
-      <Style.Account>
+      <Style.Account onClick={toggleDropdown}>
         <ProfileIcon urlImage={user?.profile_image} />
         <span>
           <b>{user?.name}</b>
           <p>{user?.username}</p>
         </span>
+
+        <Style.ButtonLogout isOpen={isOpen}>
+          <Button style={{ backgroundColor: 'red' }}
+            onClick={out}>Sair</Button>
+        </Style.ButtonLogout>
       </Style.Account>
 
     </Style.SideMenu >

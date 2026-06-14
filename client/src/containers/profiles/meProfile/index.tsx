@@ -68,10 +68,10 @@ export const MeProfile = ({ cover, name, profile_image }: MeProfileProps) => {
         </Style.ProfileHeader>
       </Style.ProfileBackground>
 
-      <Style.ProfileInfo>
+      <Style.ProfileInfoEdit>
         <FloatingInput label="Nome" id="name" type="text" value={tempName} onChange={(e) => setTempName(e.target.value)} />
         <FloatingInput label="Alterar Senha" id="password" type="password" onChange={(e) => setTempPassword(e.target.value)} />
-      </Style.ProfileInfo>
+      </Style.ProfileInfoEdit>
 
       <Style.Buttons>
         <Style.ButtonEdit isDisabled={isSaving} type="salvar" onClick={updateProfile}>

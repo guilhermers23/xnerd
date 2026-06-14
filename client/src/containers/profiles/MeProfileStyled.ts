@@ -42,9 +42,9 @@ export const Buttons = styled.div`
 `
 
 export const ProfileInfo = styled.div`
+  display: flex;
   padding: 1rem;
   text-align: left;
-  display: flex;
   justify-content: space-between;
   align-items: center;
 
@@ -62,6 +62,10 @@ export const ProfileInfo = styled.div`
     display: flex;
     gap: 1rem;
   }
+`
+
+export const ProfileInfoEdit = styled(ProfileInfo)`
+  flex-direction: column;
 `
 
 export const EditCover = styled.span`
