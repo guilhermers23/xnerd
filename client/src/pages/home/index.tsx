@@ -3,12 +3,14 @@ import { useGetPostsQuery } from "../../services/Post.Service";
 import { CreatePost } from "../../components/createPost";
 import { Post } from "../../components/posts";
 import { Cabecalho } from "../../styles/GlobalStyles";
+import HeaderMobile from "../../components/headerMobile";
 
 export const Home = () => {
   const { data: posts, isLoading: loadingPosts, error: postError } = useGetPostsQuery();
 
   return (
     <section>
+      <HeaderMobile/>
       <Cabecalho>Following</Cabecalho>
       <CreatePost placeholder="O que está acontecendo?" titleButton="Postar" />
       {loadingPosts && "Carregando Feed..."}

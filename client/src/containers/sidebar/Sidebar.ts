@@ -20,6 +20,10 @@ export const SideMenu = styled.aside`
   align-self: flex-start;
   text-align: left;
   border-right: solid 1px ${colors.gray500} ;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `
 
 export const ListMenu = styled.ul`

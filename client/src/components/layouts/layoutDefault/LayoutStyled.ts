@@ -11,4 +11,8 @@ export const Main = styled.main`
   @media (max-width: 768px) {
     grid-template-columns: 30% 70%;
   }
+
+  @media (max-width: 480px) {
+    display: flex;
+  }
 `
