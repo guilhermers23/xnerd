@@ -2,30 +2,29 @@ import { useNavigate } from "react-router";
 import Cookies from "js-cookie";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useLoginMutation } from "../../services/Auth.Service";
+
 import { FloatingInput } from "../../components/input";
 import { Form } from "../../components/form";
+import { ResponseError } from "../../utils/ultilsFuction";
 
 interface IData { username: string, password: string };
 
 export const Login = () => {
   const navigate = useNavigate();
-  const [login, { isError, isLoading }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const { register, handleSubmit, reset } = useForm<IData>();
 
   const onSubmit: SubmitHandler<IData> = async (data) => {
-    const res = await login(data);
-    if (isError) {
-      console.log(res.error);
-      alert(res.error.data.detail);
-      return;
-    };
+    try {
+      const res = await login(data).unwrap();
+      Cookies.set("token", res.access, { expires: 1 });
+      Cookies.set("refresh", res.refresh, { expires: 7 });
 
-    if ("data" in res && res.data) {
-      Cookies.set("token", res.data.access, { expires: 1 }); // Access res.data safely
-      Cookies.set("refresh", res.data.refresh, { expires: 7 });
       reset();
       navigate("/");
-    };
+    } catch (error ) {
+      ResponseError(error, "Erro ao fazer login");
+    }
   };
 
   return (

@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { createApi, fetchBaseQuery, } from "@reduxjs/toolkit/query/react";
-export const BaseURL = 'http://localhost:8000/api/';
+import { BaseURL } from './BaseURL.Service';
 
 export const APISevice = createApi({
   reducerPath: "APIService",

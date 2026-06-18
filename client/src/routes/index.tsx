@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import { Login } from "../pages/login";
 import { Register } from "../pages/register";
-import { LayoutDefault } from "../components/layouts/layoutDefault";
+import { LayoutDefault } from "../containers/layouts/layoutDefault";
 import { Home } from "../pages/home";
 import { Profile } from "../pages/profile";
 import { Follow } from "../pages/follow";

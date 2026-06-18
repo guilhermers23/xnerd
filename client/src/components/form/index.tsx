@@ -1,4 +1,4 @@
-import { AuthLayout } from "../layouts/authLayout";
+import { AuthLayout } from "../../containers/layouts/authLayout";
 import * as Style from "./FormStyled";
 
 type Props = {

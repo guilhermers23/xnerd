@@ -3,6 +3,7 @@ import { LuImageUp } from "react-icons/lu";
 
 import { useAddPostMutation, useAddCommentsMutation } from "../../services/Post.Service";
 import { useGetMeQuery } from "../../services/Users.Service";
+import { ResponseError } from "../../utils/ultilsFuction";
 
 import { useFileUpload } from "./fuctionsCreatePost";
 
@@ -47,8 +48,7 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
       clearPost();
 
     } catch (error) {
-      console.error(error);
-      alert("Ocorreu um erro no processamento!");
+      ResponseError(error, "Ocorreu um erro no processamento!")
     }
   };
 

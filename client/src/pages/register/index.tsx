@@ -2,7 +2,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router";
 
 import { useRegisterMutation } from "../../services/Auth.Service"
-import { genereteUsername } from "../../utils/ultilsFuction";
+import { genereteUsername, ResponseError } from "../../utils/ultilsFuction";
 
 import { Form } from "../../components/form";
 import { FloatingInput } from "../../components/input";
@@ -18,28 +18,23 @@ export const Register = () => {
       cover: null,
       following: [],
       profile_image: null,
-    }
-  }
+    } }
   );
 
   const onSubmit: SubmitHandler<IData> = async (data) => {
     data.username = genereteUsername(data.name);
 
-    if (data.password == data.confirmPassword) {
-      const res = await registerService(data);
+    if (data.password == data.confirmPassword)
+      return alert("As senha não são iguais.");
+
+    try {
+      const res = await registerService(data).unwrap();
       console.log(res);
-
-      if (res.error) {
-        console.log(res.error);
-        alert("Ocorreu erro ao tentar realizar cadastrado.");
-        return;
-      };
-
       alert("Cadastro realizado com sucesso!");
       reset();
       navigate("/login");
-    } else {
-      alert("As senha não são iguais.")
+    } catch (error) {
+      ResponseError(error, "Erro ao realizar o cadastro");
     }
   };
 

@@ -9,7 +9,7 @@ import { useGetMePostsQuery } from "../../services/Post.Service";
 
 import { MeProfile } from "../../containers/profiles/meProfile";
 import { UserProfile } from "../../containers/profiles/usersProfile";
-import { Modal } from "../../containers/modal";
+import { Modal } from "../../components/modal";
 import { Post } from "../../components/posts"
 
 import { Cabecalho } from "../../styles/GlobalStyles";
