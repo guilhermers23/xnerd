@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["./commands.sh"]
+CMD ["sh", "-c", "ls -la && pwd && python --version && sleep 300"]
