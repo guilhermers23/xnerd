@@ -31,8 +31,9 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 
 ALLOWED_HOSTS = [
-    h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',')
-    if h.strip()
+    "xnerd-api.onrender.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
 
