@@ -3,9 +3,9 @@ import { colors } from "../../styles/theme";
 
 type Props = {isOpen: boolean};
 
-export const SideMenu = styled.aside`
+export const SideMenu = styled.aside<Props>`
   header{
-  padding: 1rem;
+    padding: 1rem;
   }
 
   display: flex;
@@ -22,7 +22,15 @@ export const SideMenu = styled.aside`
   border-right: solid 1px ${colors.gray500} ;
 
   @media (max-width: 480px) {
-    display: none;
+    z-index: 1;
+    top: 60px;
+    display: ${(props) => (props.isOpen ? 'block' : 'none')};
+    position: absolute;
+    background-color: ${colors.gray800};
+
+    header{
+      display: none;
+    }
   }
 `
 

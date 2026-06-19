@@ -6,6 +6,7 @@ import { useLoginMutation } from "../../services/Auth.Service";
 import { FloatingInput } from "../../components/input";
 import { Form } from "../../components/form";
 import { ResponseError } from "../../utils/ultilsFuction";
+import { ToastEmitter } from "../../components/toastify";
 
 interface IData { username: string, password: string };
 
@@ -19,10 +20,10 @@ export const Login = () => {
       const res = await login(data).unwrap();
       Cookies.set("token", res.access, { expires: 1 });
       Cookies.set("refresh", res.refresh, { expires: 7 });
-
+      ToastEmitter("Login realizado com sucesso!", "sucess");
       reset();
       navigate("/");
-    } catch (error ) {
+    } catch (error) {
       ResponseError(error, "Erro ao fazer login");
     }
   };

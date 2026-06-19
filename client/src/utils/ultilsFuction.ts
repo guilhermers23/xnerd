@@ -1,16 +1,15 @@
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useFollowUserMutation } from "../services/Users.Service";
+import { ToastEmitter } from "../components/toastify";
 
 export const useFollow = () => {
   const [followUser, { isLoading: followLoading }] = useFollowUserMutation();
 
   const fuctionFollow = async (id: number) => {
     try {
-      const res = await followUser(id).unwrap();
-      alert(res.detail);
+      await followUser(id).unwrap();
     } catch (error) {
-      alert("Desculpe! Ocorreu algum erro.");
-      console.error(error);
+      ResponseError(error, "Desculpe! Ocorreu algum erro.");
     }
   };
 
@@ -30,6 +29,6 @@ export const ResponseError = (error: unknown, message: string) => {
   const errorData = fetchError.data as { detail?: string; } | undefined;
   console.error("Erro completo:", fetchError);
 
-  const errorMessage = errorData?.detail || { message };
-  alert(errorMessage);
+  const errorMessage = errorData?.detail || message;
+  ToastEmitter(errorMessage, 'error');
 };

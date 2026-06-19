@@ -4,6 +4,8 @@ import { useUpdateMeMutation } from "../../../services/Users.Service";
 import { useImageUpload } from "./functions";
 import { FloatingInput } from "../../../components/input";
 import * as Style from "../MeProfileStyled";
+import { ToastEmitter } from "../../../components/toastify";
+import { ResponseError } from "../../../utils/ultilsFuction";
 
 type MeProfileProps = Omit<IUser, "email" | "birth_date" | "following" | "password">;
 
@@ -28,11 +30,11 @@ export const MeProfile = ({ cover, name, profile_image }: MeProfileProps) => {
     try {
       const res = await updateMe(formData as Partial<IUser>).unwrap();
       console.log(res);
-      alert("Atualização feita com sucesso!");
+      console.log("Dados enviados", formData);
+      ToastEmitter("Atualização feita com sucesso!", "sucess");
       clear();
     } catch (error) {
-      console.error(error);
-      alert("Ocorreu um erro ao realizar a atualização!");
+      ResponseError(error, "Ocorreu um erro ao realizar a atualização!");
     } finally {
       setIsSaving(false);
     }
@@ -70,7 +72,7 @@ export const MeProfile = ({ cover, name, profile_image }: MeProfileProps) => {
 
       <Style.ProfileInfoEdit>
         <FloatingInput label="Nome" id="name" type="text" value={tempName} onChange={(e) => setTempName(e.target.value)} />
-        <FloatingInput label="Alterar Senha" id="password" type="password" onChange={(e) => setTempPassword(e.target.value)} />
+        <FloatingInput label="Alterar Senha" id="password" value={tempPassword} type="password" onChange={(e) => setTempPassword(e.target.value)} />
       </Style.ProfileInfoEdit>
 
       <Style.Buttons>

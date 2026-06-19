@@ -22,7 +22,8 @@ export const ProfileContainer = styled.div`
 export const ProfileBackground = styled.div<PropsCover>`
   position: relative;
   background-image: url(${props => props.isCover == "undefined" ? '/banner.jpg' : props.isCover});
-  object-fit: cover;
+  background-position: center;
+  background-size: auto;
   width: 100%;
   height: 20%;
 `

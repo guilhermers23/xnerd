@@ -15,6 +15,11 @@ export const Header = styled.header`
     display: flex;
     justify-content: space-between;
     padding: 1rem;
+
+    button{
+      border: none;
+      background-color: transparent;
+    }
   }
 
   @media (max-width: 480px) {

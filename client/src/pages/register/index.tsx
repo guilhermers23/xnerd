@@ -6,6 +6,7 @@ import { genereteUsername, ResponseError } from "../../utils/ultilsFuction";
 
 import { Form } from "../../components/form";
 import { FloatingInput } from "../../components/input";
+import { ToastEmitter } from "../../components/toastify";
 
 interface IData extends Omit<IUser, 'id'> { confirmPassword: string };
 
@@ -24,13 +25,13 @@ export const Register = () => {
   const onSubmit: SubmitHandler<IData> = async (data) => {
     data.username = genereteUsername(data.name);
 
-    if (data.password == data.confirmPassword)
-      return alert("As senha não são iguais.");
+    if (data.password !== data.confirmPassword)
+      return ToastEmitter("As senha não são iguais.", "warning");
 
     try {
       const res = await registerService(data).unwrap();
       console.log(res);
-      alert("Cadastro realizado com sucesso!");
+      ToastEmitter("Cadastro realizado com sucesso!", "sucess");
       reset();
       navigate("/login");
     } catch (error) {
@@ -63,12 +64,12 @@ export const Register = () => {
         required
       />
 
-      <FloatingInput type="password" label="Senha" id="password"
+      <FloatingInput min={6} type="password" label="Senha" id="password"
         {...register("password")}
         required
       />
 
-      <FloatingInput type="password" label="Confirme sua Senha" id="confirmPassword"
+      <FloatingInput min={6} type="password" label="Confirme sua Senha" id="confirmPassword"
         {...register("confirmPassword")}
         required
       />

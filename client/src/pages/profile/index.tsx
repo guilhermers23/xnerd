@@ -52,7 +52,8 @@ export const Profile = () => {
           is_following={user.is_following}
           isLoggedIn={isLoggedIn}
         />
-        : "Ocorreu um erro ao processar os dados!"}
+        : "Ocorreu um erro ao processar os dados!"
+      }
 
       <Cabecalho style={{ borderRight: "none", borderLeft: "none" }}>Suas postagens</Cabecalho>
 

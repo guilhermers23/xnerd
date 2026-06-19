@@ -4,6 +4,7 @@ import { LuImageUp } from "react-icons/lu";
 import { useAddPostMutation, useAddCommentsMutation } from "../../services/Post.Service";
 import { useGetMeQuery } from "../../services/Users.Service";
 import { ResponseError } from "../../utils/ultilsFuction";
+import { ToastEmitter } from "../toastify";
 
 import { useFileUpload } from "./fuctionsCreatePost";
 
@@ -25,7 +26,7 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
 
   const publishPost = async () => {
     if (content.trim().length < 3) {
-      alert('Campo deve possuir no mínimo 3 caracteres.');
+      ToastEmitter('Campo deve possuir no mínimo 3 caracteres.', 'warning');
       return;
     }
 
@@ -42,8 +43,8 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
       } else {
         // Caso contrário, é um post normal
         await makePost(formData).unwrap();
+        ToastEmitter("Postagem realizada com sucesso!", "sucess");
       }
-      alert("Sucesso!");
       setContent('');
       clearPost();
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
@@ -14,9 +15,10 @@ import { logout } from "../../store/reducers/user";
 import { ProfileIcon } from "../../components/profileIcon";
 import { Button } from "../../styles/GlobalStyles";
 import * as Style from "./Sidebar";
-import { useState } from "react";
 
-export const SideBar = () => {
+type Props = { mobile?: boolean };
+
+export const SideBar = ({ mobile = false }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ export const SideBar = () => {
   };
 
   return (
-    <Style.SideMenu>
+    <Style.SideMenu isOpen={mobile}>
       <nav>
         <Link to="/">
           <header><BsTwitterX size={35} /></header>

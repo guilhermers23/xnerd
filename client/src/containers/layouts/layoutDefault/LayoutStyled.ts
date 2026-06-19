@@ -14,5 +14,6 @@ export const Main = styled.main`
 
   @media (max-width: 480px) {
     display: flex;
+    flex-direction: column;
   }
 `
