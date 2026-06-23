@@ -7,14 +7,14 @@ import * as Style from "../MeProfileStyled";
 
 type MeProfileProps = Omit<IUser, "email" | "birth_date" | "following" | "password">;
 
-export const MeProfile = ({ cover, name, profile_image }: MeProfileProps) => {
+export const MeProfile = ({ cover_url, name, profile_image_url }: MeProfileProps) => {
   const [updateMe] = useUpdateMeMutation();
 
   // Estados para os dados do perfil
   const [tempName, setTempName] = useState<string>(name);
   const [tempPassword, setTempPassword] = useState<string>('');
-  const [tempCover, setTempCover] = useState<string>(cover || '');
-  const [tempAvatar, setTempAvatar] = useState<string>(profile_image || '');
+  const [tempCover, setTempCover] = useState<string>(cover_url || '');
+  const [tempAvatar, setTempAvatar] = useState<string>(profile_image_url || '');
   const [isSaving, setIsSaving] = useState(false);
 
   // Fallbacks caso os links estejam vazios
@@ -27,8 +27,8 @@ export const MeProfile = ({ cover, name, profile_image }: MeProfileProps) => {
     // Como mudamos para links, não precisamos de FormData. Enviamos um JSON simples.
     const payload: Partial<IUser> & { password?: string } = {
       name: tempName,
-      cover: tempCover,
-      profile_image: tempAvatar,
+      cover_url: tempCover,
+      profile_image_url: tempAvatar,
     };
 
     // Só adiciona a senha ao payload se o usuário digitou algo

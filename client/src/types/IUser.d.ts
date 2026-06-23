@@ -5,7 +5,9 @@ declare interface IUser {
   email: string;
   readonly password: string;
   cover: string | null;
+  cover_url: string | null;
   profile_image: string | null;
+  profile_image_url: string | null;
   birth_date: string;
   following: number[];
   followers_count: number;
