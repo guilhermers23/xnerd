@@ -28,13 +28,15 @@ export const Overlay = styled.div`
 
 export const ModalContainer = styled.div`
   background-color: ${colors.gray800};
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
   border-radius: 12px;
   width: 100%;
   max-width: 500px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   animation: ${fadeIn} 0.3s ease-out;
   position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const CloseButton = styled.button`

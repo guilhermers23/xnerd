@@ -9,7 +9,6 @@ export const FormContainer = styled.form`
   justify-content: space-between;
   max-width: 70%;
   margin: 0 auto;
-  gap: 1rem;
 `
 
 export const FormCabecalho = styled.span`

@@ -1,19 +1,28 @@
-import { useState } from "react";
-import { LuImageUp } from "react-icons/lu";
+import { useState } from 'react';
+import { LuImageUp } from 'react-icons/lu';
 
-import { useAddPostMutation, useAddCommentsMutation } from "../../services/Post.Service";
-import { useGetMeQuery } from "../../services/Users.Service";
-import { ResponseError } from "../../utils/ultilsFuction";
-import { ToastEmitter } from "../toastify";
+import {
+  useAddPostMutation,
+  useAddCommentsMutation
+} from '../../services/Post.Service';
+import { useGetMeQuery } from '../../services/Users.Service';
+import { ResponseError } from '../../utils/ultilsFuction';
+import { ToastEmitter } from '../toastify';
 
-import { useFileUpload } from "./fuctionsCreatePost";
+//import { useFileUpload } from './fuctionsCreatePost';
 
-import { colors } from "../../styles/theme";
-import { ProfileIcon } from "../profileIcon";
-import { Button, Container } from "../../styles/GlobalStyles";
-import * as Style from "./CreatePostStyled";
+import { colors } from '../../styles/theme';
+import { ProfileIcon } from '../profileIcon';
+import { Button, Container } from '../../styles/GlobalStyles';
+import * as Style from './CreatePostStyled';
+import { FloatingInput } from '../input';
+import { Modal } from '../modal';
 
-type Props = { placeholder: string, titleButton: string, postID?: number | string };
+type Props = {
+  placeholder: string;
+  titleButton: string;
+  postID?: number | string;
+};
 
 export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
   const { data: user } = useGetMeQuery();
@@ -21,7 +30,9 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
   const [addComment] = useAddCommentsMutation();
 
   const [content, setContent] = useState('');
-  const { file, preview, onChangeFile, clearPost } = useFileUpload();
+  const [media, setMedia] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  //const { file, preview, onChangeFile, clearPost } = useFileUpload();
   const isDisabled = content.trim().length < 3;
 
   const publishPost = async () => {
@@ -30,57 +41,83 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('content', content);
-    if (file) {
-      formData.append('midia', file);
+    const payload: Partial<IPost> & { media?: string } = {
+      content: content
+    };
+
+    if (media) {
+      payload.media = media;
     }
 
     try {
       if (postID) {
         // Se postID existe, é um comentário
-        await addComment({ postID, formData }).unwrap();
+        await addComment({ postID, body: payload }).unwrap();
       } else {
         // Caso contrário, é um post normal
-        await makePost(formData).unwrap();
-        ToastEmitter("Postagem realizada com sucesso!", "sucess");
+        await makePost(payload).unwrap();
+        ToastEmitter('Postagem realizada com sucesso!', 'sucess');
       }
       setContent('');
-      clearPost();
-
     } catch (error) {
-      ResponseError(error, "Ocorreu um erro no processamento!")
+      ResponseError(error, 'Ocorreu um erro no processamento!');
     }
   };
-
 
   return (
     <Container>
       <Style.Card>
         <ProfileIcon urlImage={user?.profile_image} />
-        <Style.Input name="content" id="content" placeholder={placeholder}
+        <Style.Input
+          name="content"
+          id="content"
+          placeholder={placeholder}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
       </Style.Card>
 
-      {preview && (
+      {media && (
         <Style.Preview>
-          <Style.Close src="/close.png" alt="Close" onClick={clearPost} />
-          <Style.PreviewFile src={preview} alt="Preview do arquivo" />
+          <Style.Close
+            src="/close.png"
+            alt="Close"
+            onClick={() => setMedia('')}
+          />
+          <Style.PreviewFile src={media} alt="Preview do arquivo" />
         </Style.Preview>
       )}
 
       <Style.ListIcons>
         <span>
-          <label htmlFor="file-upload-image">
-            <LuImageUp size={25} color={colors.info} cursor="pointer" title="Selecionar uma imagem" />
-          </label>
-          <Style.UploadIcon id="file-upload-image" type="file" accept="image/*"
-            onChange={onChangeFile} />
+          <a onClick={() => setOpenModal(!openModal)}>
+            <LuImageUp
+              size={25}
+              color={colors.info}
+              cursor="pointer"
+              title="Selecionar uma imagem"
+            />
+          </a>
+
+          <Modal
+            isOpen={openModal}
+            onClose={() => setOpenModal(false)}
+            title="Adicionar mídia"
+          >
+              <FloatingInput
+                label="Link para postagem de mídia"
+                id="cover"
+                type="text"
+                value={media}
+                onChange={(e) => setMedia(e.target.value)}
+              />
+          </Modal>
         </span>
-        <Button onClick={publishPost} disabled={isDisabled}>{titleButton}</Button>
+
+        <Button onClick={publishPost} disabled={isDisabled}>
+          {titleButton}
+        </Button>
       </Style.ListIcons>
     </Container>
-  )
+  );
 };
