@@ -11,7 +11,8 @@ class PostSerializer(serializers.ModelSerializer):
     # Aqui a mágica acontece: o campo 'user' deixa de ser um ID 
     # e vira o objeto do AuthorSerializer
     user = AuthorSerializer(read_only=True)
-    midia_url = serializers.ReadOnlyField(source='get_midia')
+    midia = serializers.ReadOnlyField(source='get_midia')
+    midia_url = serializers.URLField(required=False, allow_blank=True)
     is_liked = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
