@@ -51,8 +51,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     # Sobrescrevemos para garantir que o perfil sempre retorne uma URL válida ou fallback
     profile_image = serializers.ReadOnlyField(source='get_profile_image')
+    profile_image_url = serializers.URLField(required=True, allow_blank=True)
     cover = serializers.ReadOnlyField(source='get_cover')
-    
+    cover_url = serializers.URLField(required=True, allow_blank=True)
     is_following = serializers.SerializerMethodField()
     followers_count = serializers.SerializerMethodField()
     following_count = serializers.SerializerMethodField()
