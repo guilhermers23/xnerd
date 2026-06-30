@@ -5,7 +5,7 @@ from app.models import User, Post
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'profile_image']
+        fields = ['id', 'username', 'name', 'profile_image', 'profile_image_url']
 
 class PostSerializer(serializers.ModelSerializer):
     # Aqui a mágica acontece: o campo 'user' deixa de ser um ID 

@@ -30,7 +30,7 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
   const [addComment] = useAddCommentsMutation();
 
   const [content, setContent] = useState('');
-  const [media, setMedia] = useState('');
+  const [midia, setMidia] = useState('');
   const [openModal, setOpenModal] = useState(false);
   //const { file, preview, onChangeFile, clearPost } = useFileUpload();
   const isDisabled = content.trim().length < 3;
@@ -41,12 +41,12 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
       return;
     }
 
-    const payload: Partial<IPost> & { media?: string } = {
+    const payload: Partial<IPost> & { midia_url?: string } = {
       content: content
     };
 
-    if (media) {
-      payload.media = media;
+    if (midia) {
+      payload.midia_url = midia;
     }
 
     try {
@@ -59,6 +59,7 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
         ToastEmitter('Postagem realizada com sucesso!', 'sucess');
       }
       setContent('');
+      setMidia('');
     } catch (error) {
       ResponseError(error, 'Ocorreu um erro no processamento!');
     }
@@ -67,7 +68,7 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
   return (
     <Container>
       <Style.Card>
-        <ProfileIcon urlImage={user?.profile_image} />
+        <ProfileIcon urlImage={user?.profile_image ?? ''} />
         <Style.Input
           name="content"
           id="content"
@@ -77,14 +78,14 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
         />
       </Style.Card>
 
-      {media && (
+      {midia && (
         <Style.Preview>
           <Style.Close
             src="/close.png"
             alt="Close"
-            onClick={() => setMedia('')}
+            onClick={() => setMidia('')}
           />
-          <Style.PreviewFile src={media} alt="Preview do arquivo" />
+          <Style.PreviewFile src={midia} alt="Preview do arquivo" />
         </Style.Preview>
       )}
 
@@ -108,8 +109,8 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
                 label="Link para postagem de mídia"
                 id="cover"
                 type="text"
-                value={media}
-                onChange={(e) => setMedia(e.target.value)}
+                value={midia}
+                onChange={(e) => setMidia(e.target.value)}
               />
           </Modal>
         </span>

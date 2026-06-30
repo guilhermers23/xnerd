@@ -7,14 +7,14 @@ import * as Style from "../MeProfileStyled";
 
 type MeProfileProps = Omit<IUser, "email" | "birth_date" | "following" | "password">;
 
-export const MeProfile = ({ cover_url, name, profile_image_url }: MeProfileProps) => {
+export const MeProfile = ({ cover_url, name, profile_image }: MeProfileProps) => {
   const [updateMe] = useUpdateMeMutation();
 
   // Estados para os dados do perfil
   const [tempName, setTempName] = useState<string>(name);
   const [tempPassword, setTempPassword] = useState<string>('');
   const [tempCover, setTempCover] = useState<string>(cover_url || '');
-  const [tempAvatar, setTempAvatar] = useState<string>(profile_image_url || '');
+  const [tempAvatar, setTempAvatar] = useState<string>(profile_image || '');
   const [isSaving, setIsSaving] = useState(false);
 
   // Fallbacks caso os links estejam vazios
@@ -38,6 +38,7 @@ export const MeProfile = ({ cover_url, name, profile_image_url }: MeProfileProps
       await updateMe(payload).unwrap();
       ToastEmitter("Atualização feita com sucesso!", "sucess");
       setTempPassword(''); // Limpa o campo de senha por segurança
+      console.log(payload);
     } catch (error) {
       ResponseError(error, "Ocorreu um erro ao realizar a atualização!");
     } finally {

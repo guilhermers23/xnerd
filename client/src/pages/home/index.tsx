@@ -21,6 +21,7 @@ export const Home = () => {
           creation_at={post.creation_at}
           likes_count={post.likes_count}
           is_liked={post.is_liked}
+          midia_url={post.midia_url}
         />
       ))}
     </section>

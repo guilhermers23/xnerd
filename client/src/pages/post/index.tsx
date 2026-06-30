@@ -21,6 +21,7 @@ export const PostDetail = () => {
           creation_at={data.creation_at}
           likes_count={data.likes_count}
           is_liked={data.is_liked}
+          midia_url={data.midia_url}
         />
       }
 
@@ -36,6 +37,7 @@ export const PostDetail = () => {
             creation_at={comments.creation_at}
             likes_count={comments.likes_count}
             is_liked={comments.is_liked}
+            midia_url={comments.midia_url}
           />
         ))
       )}

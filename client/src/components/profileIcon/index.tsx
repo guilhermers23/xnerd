@@ -1,7 +1,6 @@
 import * as Style from "./ProfileIconStyled";
 
-export const ProfileIcon = (props: { urlImage: string | null | undefined }) => {
-  const srcUlr = props.urlImage || "/avatar_default.jpg";
+export const ProfileIcon = (props: { urlImage: string }) => {
 
-  return <Style.ProfileIcon src={srcUlr} alt="Avatar do Perfil" />
+  return <Style.ProfileIcon src={props.urlImage} alt="Avatar do Perfil" />
 };
