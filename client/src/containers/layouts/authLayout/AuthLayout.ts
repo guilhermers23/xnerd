@@ -3,17 +3,26 @@ import { colors } from "../../../styles/theme";
 
 export const AuthContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   justify-content: center;
+
+  @media (max-width: 468px) {
+   display: flex;
+ }
+
+ @media (max-width: 768px) {
+  grid-template-columns: 60% 40%;
+  }
+
 `
 
 export const FormGrup = styled.section`
   display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: 100vh;
-    padding: 1rem;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  padding: 1rem;
 `
 
 export const Logo = styled.header`
@@ -29,11 +38,15 @@ export const BackgroundAuth = styled.div`
   width: 100%;
 
   img{
-    border-radius: 5rem;
+    border-radius: 5rem 0 5rem 0;
     padding: 1rem;
     width: 100%;
     height: 99vh;
     object-fit: cover;
+  }
+
+   @media (max-width: 468px) {
+    display: none;
   }
 `
 

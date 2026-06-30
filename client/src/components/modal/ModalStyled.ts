@@ -37,6 +37,12 @@ export const ModalContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 600px) {
+    width: 90%;
+    height: 90%;
+    overflow-y: auto;
+  }
 `;
 
 export const CloseButton = styled.button`

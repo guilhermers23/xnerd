@@ -13,12 +13,12 @@ export const Follow = () => {
     <Style.SectionFollow>
       <Cabecalho>Follow</Cabecalho>
       {isLoading && "Carregando Feed..."}
-      {data?.map(({ name, username, profile_image, id, is_following }) =>
+      {data?.map(({ name, username, profile_image_url, id, is_following }) =>
         <>
           <Style.Follow>
             <Link to={`/${username}`}>
               <Style.HeaderFollow>
-                <ProfileIcon urlImage={profile_image} key={id} />
+                <ProfileIcon urlImage={profile_image_url || '/avatar_default.jpg'} key={id} />
                 <span>
                   <b>{name}</b>
                   <p>{username}</p>

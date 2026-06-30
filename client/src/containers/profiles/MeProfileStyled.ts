@@ -11,6 +11,11 @@ export const Avatar = styled(ProfileIcon)`
   height: 14rem;
   border: 3px solid ${colors.gray900};
   margin-top: 6rem;
+
+  @media (max-width: 600px){
+    width: 12rem;
+    height: 12rem;
+  }
 `
 
 export const ProfileContainer = styled.div`
@@ -43,6 +48,7 @@ export const Buttons = styled.div`
 `
 
 export const ProfileInfo = styled.div`
+  margin-top: 4rem;
   display: flex;
   padding: 1rem;
   text-align: left;
