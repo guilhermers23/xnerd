@@ -33,7 +33,7 @@ export const SideBar = ({ mobile = false }: Props) => {
   };
 
   return (
-    <Style.SideMenu isOpen={mobile}>
+    <Style.SideMenu $isOpen={mobile}>
       <nav>
         <Link to="/">
           <header><BsTwitterX size={35} /></header>
@@ -58,13 +58,13 @@ export const SideBar = ({ mobile = false }: Props) => {
       </nav>
 
       <Style.Account onClick={toggleDropdown}>
-        <ProfileIcon urlImage={user?.profile_image} />
+        <ProfileIcon urlImage={user?.profile_image_url} />
         <span>
           <b>{user?.name}</b>
           <p>{user?.username}</p>
         </span>
 
-        <Style.ButtonLogout isOpen={isOpen}>
+        <Style.ButtonLogout $isOpen={isOpen}>
           <Button style={{ backgroundColor: 'red' }}
             onClick={out}>Sair</Button>
         </Style.ButtonLogout>

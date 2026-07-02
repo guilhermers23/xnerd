@@ -11,7 +11,7 @@ export const UserProfile = ({ id, cover, name, username, profile_image, follower
 
   return (
     <Style.ProfileContainer>
-      <Style.ProfileBackground isCover={coverSrc}>
+      <Style.ProfileBackground $isCover={coverSrc}>
         <Style.ProfileHeader>
           <Style.Avatar src={avatarSrc} alt="Foto de Perfil" />
         </Style.ProfileHeader>

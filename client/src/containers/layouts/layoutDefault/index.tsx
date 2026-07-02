@@ -18,7 +18,7 @@ export const LayoutDefault = () => {
 
   useEffect(() => {
     if (Cookies.get("token") && getUser) dispatch(setUser(getUser));
-    if (!Cookies.get("token") && !getUser) {
+    if (!Cookies.get("token") || !getUser) {
       dispatch(logout())
       navigate("/login")
     }

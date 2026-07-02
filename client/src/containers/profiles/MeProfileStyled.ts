@@ -2,8 +2,8 @@ import { colors } from '../../styles/theme';
 import styled from "styled-components";
 import { ProfileIcon } from "../../components/profileIcon/ProfileIconStyled";
 
-interface PropsCover { isCover: string };
-interface PropsButton { type: "salvar" | "cancelar", isDisabled: boolean };
+interface PropsCover { $isCover: string };
+interface PropsButton { $type: "salvar" | "cancelar", $isDisabled: boolean };
 
 export const Avatar = styled(ProfileIcon)`
   position: relative;
@@ -26,7 +26,7 @@ export const ProfileContainer = styled.div`
 
 export const ProfileBackground = styled.div<PropsCover>`
   position: relative;
-  background-image: url(${props => props.isCover == "undefined" ? '/banner.jpg' : props.isCover});
+  background-image: url(${props => props.$isCover == "undefined" ? '/banner.jpg' : props.$isCover});
   background-position: center;
   background-size: auto;
   width: 100%;
@@ -113,17 +113,17 @@ export const EditAvatar = styled.span`
 
 export const ButtonEdit = styled.button<PropsButton>`
   z-index: 1;
-  display: ${props => (props.isDisabled == true) ? "none" : "true"};
+  display: ${props => (props.$isDisabled == true) ? "none" : "true"};
   padding: .5rem 1rem;
   border-radius: 2rem;
   margin: .5rem;
-  background-color: ${props => props.type == "salvar" ? `${colors.success}` : `${colors.red}`};
+  background-color: ${props => props.$type == "salvar" ? `${colors.success}` : `${colors.red}`};
   border: none;
   cursor: pointer;
   transition: all ease-in-out .2s;
 
   &:hover{
     transition: all ease-in-out .2s;
-    background-color: ${props => props.type == "salvar" ? `${colors.primary}` : `${colors.error}`};
+    background-color: ${props => props.$type == "salvar" ? `${colors.primary}` : `${colors.error}`};
   }
 `

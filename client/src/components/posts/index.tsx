@@ -14,7 +14,7 @@ export const Post = ({ user, content, midia, comments_count, likes_count, id, is
   return (
     <Style.ContainerCard>
       <Link to={`/${user.username}`}>
-        <ProfileIcon urlImage={user.profile_image_url || '/avatar_default.jpg'} />
+        <ProfileIcon urlImage={user.profile_image_url} />
       </Link>
       <Style.HeaderPost>
         <h4>{user.name} <i>{user.username}</i></h4>

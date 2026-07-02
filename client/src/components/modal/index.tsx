@@ -1,6 +1,6 @@
 import type { JSX } from "react";
-import * as Style from "./ModalStyled";
 import { Cabecalho } from "../../styles/GlobalStyles";
+import * as Style from "./ModalStyled";
 
 type PropsModal = { isOpen: boolean, onClose: () => void, children: JSX.Element, title: string };
 

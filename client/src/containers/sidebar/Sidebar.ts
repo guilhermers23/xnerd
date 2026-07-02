@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles/theme";
 
-type Props = {isOpen: boolean};
+type Props = {$isOpen: boolean};
 
 export const SideMenu = styled.aside<Props>`
   header{
@@ -24,7 +24,7 @@ export const SideMenu = styled.aside<Props>`
   @media (max-width: 480px) {
     z-index: 1;
     top: 60px;
-    display: ${(props) => (props.isOpen ? 'block' : 'none')};
+    display: ${(props) => (props.$isOpen ? 'block' : 'none')};
     position: absolute;
     background-color: ${colors.gray800};
 
@@ -56,19 +56,18 @@ export const ListMenu = styled.ul`
   }
 `
 export const ButtonLogout = styled.section<Props>`
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  display: ${(props) => (props.$isOpen ? 'block' : 'none')};
   position: absolute;
   top: -4rem;
   right: 1rem;
 `
 
-export const Account = styled.button`
+export const Account = styled.footer`
   width: 100%;
   position: relative;
   font-size: 1.6rem;
   color: ${colors.textDefault};
   background-color: transparent;
-  border: none;
   display: flex;
   justify-content: flex-start;
   align-items: center;

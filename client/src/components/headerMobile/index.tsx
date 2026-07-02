@@ -17,7 +17,7 @@ const HeaderMobile = () => {
       <Style.Header>
         <nav>
           <button onClick={() => setOpen(!open)}>
-            <ProfileIcon urlImage={user?.profile_image} />
+            <ProfileIcon urlImage={user?.profile_image_url} />
           </button>
           <Link to="/">
             <header><BsTwitterX size={35} /></header>

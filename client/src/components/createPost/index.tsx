@@ -68,7 +68,7 @@ export const CreatePost = ({ placeholder, titleButton, postID }: Props) => {
   return (
     <Container>
       <Style.Card>
-        <ProfileIcon urlImage={user?.profile_image ?? ''} />
+        <ProfileIcon urlImage={user?.profile_image_url} />
         <Style.Input
           name="content"
           id="content"

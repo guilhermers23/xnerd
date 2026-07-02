@@ -44,6 +44,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
         if password:
             instance.set_password(password)
+            instance.save()
 
         return super().update(instance, validated_data)
 

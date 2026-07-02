@@ -36,9 +36,9 @@ export const MeProfile = ({ cover_url, name, profile_image }: MeProfileProps) =>
 
     try {
       await updateMe(payload).unwrap();
+      console.log(payload);
       ToastEmitter("Atualização feita com sucesso!", "sucess");
       setTempPassword(''); // Limpa o campo de senha por segurança
-      console.log(payload);
     } catch (error) {
       ResponseError(error, "Ocorreu um erro ao realizar a atualização!");
     } finally {
@@ -49,7 +49,7 @@ export const MeProfile = ({ cover_url, name, profile_image }: MeProfileProps) =>
   return (
     <Style.ProfileContainer>
       {/* O background e o avatar mudam em tempo real conforme o usuário cola o link */}
-      <Style.ProfileBackground isCover={coverSrc}>
+      <Style.ProfileBackground $isCover={coverSrc}>
         <Style.ProfileHeader>
           <Style.Avatar src={avatarSrc} alt="Foto de Perfil" />
         </Style.ProfileHeader>
@@ -90,7 +90,7 @@ export const MeProfile = ({ cover_url, name, profile_image }: MeProfileProps) =>
       </Style.ProfileInfoEdit>
 
       <Style.Buttons>
-        <Style.ButtonEdit isDisabled={isSaving} type="salvar" onClick={updateProfile}>
+        <Style.ButtonEdit $isDisabled={isSaving} $type="salvar" onClick={updateProfile}>
           {isSaving ? "Salvando..." : "Salvar"}
         </Style.ButtonEdit>
       </Style.Buttons>
